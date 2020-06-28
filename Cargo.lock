@@ -162,8 +162,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9457b06509d27052635f90d6466700c65095fdf75409b3fbdd903e988b886f49"
 
 [[package]]
-name = "libftd2xx_ffi"
-version = "0.1.0"
+name = "libftd2xx-ffi"
+version = "0.1.1"
 dependencies = [
  "bindgen",
 ]

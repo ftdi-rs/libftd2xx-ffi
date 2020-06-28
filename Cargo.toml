@@ -1,19 +1,15 @@
 [package]
-name = "libftd2xx_ffi"
-version = "0.1.0"
+name = "libftd2xx-ffi"
+version = "0.1.1"
+description = "Rust FFI bindings to the FTDI D2XX drivers."
+keywords = ["ftdi", "ffi", "usb"]
+categories = ["external-ffi-bindings"]
 authors = ["Alex M."]
 edition = "2018"
-include = [
-    "libftd2xx_src/linux/x64/build/libftd2xx.a",
-    "libftd2xx_src/linux/x64/ftd2xx.h",
-    "libftd2xx_src/linux/x86/build/libftd2xx.a",
-    "libftd2xx_src/linux/x86/ftd2xx.h",
-    "libftd2xx_src/windows/amd64/ftd2xx.lib",
-    "libftd2xx_src/windows/ftd2xx.h",
-    "libftd2xx_src/windows/i386/ftd2xx.lib",
-    "README.md",
-    "LICENSE",
-]
+readme = "README.md"
+build = "build.rs"
+repository = "https://github.com/newAM/libftd2xx-ffi-rs/"
+license = "MIT"
 
 [build-dependencies]
 bindgen = "0.54"
