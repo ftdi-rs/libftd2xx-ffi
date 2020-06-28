@@ -1,0 +1,23 @@
+language: rust
+os:
+  - linux
+  - windows
+rust:
+  - stable
+  - beta
+  - nightly
+jobs:
+  allow_failures:
+    - rust: nightly
+  fast_finish: true
+script:
+  - |
+    if [ "$TRAVIS_OS_NAME" = "windows" ]; then
+      export LIBCLANG_PATH="C:\\Program Files\\LLVM\\\\bin"
+      export TARGET="x86_64-pc-windows-msvc"
+    else
+      export TARGET="x86_64-unknown-linux-gnu"
+    fi
+  - rustup target add "$TARGET"
+  - cargo build --verbose --target "$TARGET" --all
+  - cargo test --verbose --target "$TARGET" --all

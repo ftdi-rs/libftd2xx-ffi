@@ -11,7 +11,9 @@ include = [
     "libftd2xx_src/windows/amd64/ftd2xx.lib",
     "libftd2xx_src/windows/ftd2xx.h",
     "libftd2xx_src/windows/i386/ftd2xx.lib",
+    "README.md",
+    "LICENSE",
 ]
 
 [build-dependencies]
-bindgen = "0.53.1"
+bindgen = "0.54"
