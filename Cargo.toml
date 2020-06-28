@@ -3,6 +3,15 @@ name = "libftd2xx_ffi"
 version = "0.1.0"
 authors = ["Alex M."]
 edition = "2018"
+include = [
+    "libftd2xx_src/linux/x64/build/libftd2xx.a",
+    "libftd2xx_src/linux/x64/ftd2xx.h",
+    "libftd2xx_src/linux/x86/build/libftd2xx.a",
+    "libftd2xx_src/linux/x86/ftd2xx.h",
+    "libftd2xx_src/windows/amd64/ftd2xx.lib",
+    "libftd2xx_src/windows/ftd2xx.h",
+    "libftd2xx_src/windows/i386/ftd2xx.lib",
+]
 
 [build-dependencies]
 bindgen = "0.53.1"

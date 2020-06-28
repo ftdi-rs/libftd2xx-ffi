@@ -28,12 +28,18 @@ mod paths {
 }
 
 fn main() {
-    println!("cargo:rustc-link-search={}", paths::SEARCH);
+    let cwd = env::current_dir().unwrap();
+    let mut header = cwd.clone();
+    header.push(paths::HEADER);
+    let mut search = cwd.clone();
+    search.push(paths::SEARCH);
+
+    println!("cargo:rustc-link-search={}", search.to_str().unwrap());
     println!("cargo:rustc-link-lib=ftd2xx");
-    println!("cargo:rerun-if-changed={}", paths::HEADER);
+    println!("cargo:rerun-if-changed={}", header.to_str().unwrap());
 
     let bindings = bindgen::Builder::default()
-        .header(paths::HEADER)
+        .header(header.to_str().unwrap())
         .whitelist_function("FT_.*")
         .whitelist_type("FT_.*")
         .whitelist_var("FT_.*")
