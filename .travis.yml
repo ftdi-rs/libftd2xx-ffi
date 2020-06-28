@@ -21,6 +21,7 @@ script:
   - rustup target add "$TARGET"
   - cargo build --verbose --target "$TARGET" --all
   - cargo test --verbose --target "$TARGET" --all
+  - cargo package --verbose --target "$TARGET"
 deploy:
   provider: cargo
   token:
