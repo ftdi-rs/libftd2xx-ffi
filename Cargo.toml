@@ -6,8 +6,3 @@ edition = "2018"
 
 [build-dependencies]
 bindgen = "0.53.1"
-reqwest = {version = "0.10.6", features = ["blocking"]}
-flate2 = "1.0.14"
-tar = "0.4.28"
-url = "2.1.1"
-zip = "0.5.6"
