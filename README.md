@@ -1,7 +1,7 @@
 # libftd2xx-ffi
 [![crates.io](https://img.shields.io/crates/v/libftd2xx-ffi.svg)](https://crates.io/crates/libftd2xx-ffi)
 [![docs.rs](https://docs.rs/libftd2xx-ffi/badge.svg)](https://docs.rs/libftd2xx-ffi/)
-[![travis-ci.com](https://api.travis-ci.com/newAM/libftd2xx-ffi-rs.svg?branch=master)](https://api.travis-ci.com/newAM/libftd2xx-ffi-rs.svg?branch=master)
+[![travis-ci.com](https://api.travis-ci.com/newAM/libftd2xx-ffi-rs.svg?branch=master)](https://travis-ci.com/github/newAM/libftd2xx-ffi-rs)
 
 Rust FFI bindings to the [FTDI D2XX drivers].
 
