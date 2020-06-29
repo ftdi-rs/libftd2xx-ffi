@@ -1,5 +1,4 @@
-extern crate bindgen;
-
+#[deny(unsafe_code)]
 use std::env;
 use std::path::PathBuf;
 

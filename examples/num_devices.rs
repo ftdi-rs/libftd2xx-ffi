@@ -1,5 +1,3 @@
-extern crate libftd2xx_ffi;
-
 use libftd2xx_ffi::{FT_ListDevices, DWORD, FT_LIST_NUMBER_ONLY, FT_STATUS, PVOID};
 
 fn main() {
