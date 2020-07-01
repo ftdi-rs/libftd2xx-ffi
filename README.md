@@ -33,6 +33,11 @@ libftd2xx-ffi = { version = "0.1", features = ["bindgen"] }
 Bindgen has additional dependencies that must be installed in order to
 compile successfully, see the [bindgen requirements] page for more details.
 
+## References
+
+* [D2XX Programmers Guide V1.4]
+* [D2XX Drivers Download Page]
+
 ## License
 FTDI provides the D2XX driver as a compiled library and a header file.
 These files can be found within the `libftd2xx_src` directory.
@@ -58,6 +63,8 @@ copying the `bindings.rs` file from the build output.
 The Windows bindings were run through `dos2unix` to normalize line endings
 and make it easier to diff the generated bindings.
 
+[D2XX Drivers Download Page]: https://www.ftdichip.com/Drivers/D2XX.htm
+[D2xx Programmers Guide V1.4]: https://www.ftdichip.com/Support/Documents/ProgramGuides/D2XX_Programmer's_Guide(FT_000071).pdf
 [Driver License Terms]: https://www.ftdichip.com/Drivers/FTDriverLicenceTerms.htm
 [FTDI D2XX drivers]: https://www.ftdichip.com/Drivers/D2XX.htm
 [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
