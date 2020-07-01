@@ -19,7 +19,9 @@ script:
       export TARGET="x86_64-unknown-linux-gnu"
     fi
   - rustup target add "$TARGET"
+  - cargo build --verbose --target "$TARGET" --all --features=bindgen 
   - cargo build --verbose --target "$TARGET" --all
+  - cargo test --verbose --target "$TARGET" --all --features=bindgen 
   - cargo test --verbose --target "$TARGET" --all
   - cargo package --verbose --target "$TARGET"
 deploy:
@@ -30,4 +32,7 @@ deploy:
   on:
     branch: master
     tags: true
-    condition: $TRAVIS_RUST_VERSION = stable
+    condition: $TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux
+notifications:
+  email:
+    on_success: never
