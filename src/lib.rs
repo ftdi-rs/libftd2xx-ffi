@@ -31,6 +31,15 @@
 //! * [D2XX Programmers Guide V1.4]
 //! * [D2XX Drivers Download Page]
 //!
+//! # Troubleshooting
+//! ## Unknown Device on Linux
+//! Remove the VCP FTDI driver.
+//! ```bash
+//! sudo rmmod ftdi_sio
+//! sudo rmmod usbserial
+//! ```
+//! See [FTDI Drivers Installation Guide for Linux] for more details.
+//!
 //! # License
 //! FTDI provides the D2XX driver as a compiled library and a header file.
 //! These files can be found within the `libftd2xx_src` directory.
@@ -60,6 +69,7 @@
 //! [D2xx Programmers Guide V1.4]: https://www.ftdichip.com/Support/Documents/ProgramGuides/D2XX_Programmer's_Guide(FT_000071).pdf
 //! [Driver License Terms]: https://www.ftdichip.com/Drivers/FTDriverLicenceTerms.htm
 //! [FTDI D2XX drivers]: https://www.ftdichip.com/Drivers/D2XX.htm
+//! [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
 //! [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
 //! [bindgen]: https://github.com/rust-lang/rust-bindgen
 //! [cargo-readme]: https://github.com/livioribeiro/cargo-readme
