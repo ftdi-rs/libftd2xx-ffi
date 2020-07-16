@@ -13,15 +13,14 @@ documentation = "https://docs.rs/libftd2xx-ffi"
 license = "MIT"
 
 [dependencies]
-cfg-if = "0.1"
+cfg-if = "~0.1.10"
 
 [build-dependencies]
-bindgen = { version = "0.54", optional = true }
-cfg-if = "0.1"
+bindgen = { version = "~0.54.1", optional = true }
+cfg-if = "~0.1.10"
 
 [dev-dependencies]
-version-sync = "0.9"
+version-sync = "~0.9.1"
 
 [badges]
-travis-ci = { repository = "newAM/libftd2xx-ffi-rs" }
 maintenance = { status = "passively-maintained" }
