@@ -26,6 +26,19 @@
 //! Bindgen has additional dependencies that must be installed in order to
 //! compile successfully, see the [bindgen requirements] page for more details.
 //!
+//! # Performance
+//!
+//! From the [Rust Edition Guide].
+//!
+//! > By default, Rust will statically link all Rust code.
+//! > However, if you use the standard library,
+//! > it will dynamically link to the system's `libc` implementation.
+//! > If you'd like a 100% static binary, the `MUSL libc` can be used on Linux.
+//!
+//! On Linux I have found that compiling with
+//! `--target x86_64-unknown-linux-musl`
+//! can significantly improve runtime performance with this crate.
+//!
 //! # References
 //!
 //! * [D2XX Programmers Guide V1.4]
@@ -65,16 +78,17 @@
 //! The Windows bindings were run through `dos2unix` to normalize line endings
 //! and make it easier to diff the generated bindings.
 //!
+//! [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
+//! [bindgen]: https://github.com/rust-lang/rust-bindgen
+//! [cargo-readme]: https://github.com/livioribeiro/cargo-readme
 //! [D2XX Drivers Download Page]: https://www.ftdichip.com/Drivers/D2XX.htm
 //! [D2xx Programmers Guide V1.4]: https://www.ftdichip.com/Support/Documents/ProgramGuides/D2XX_Programmer's_Guide(FT_000071).pdf
 //! [Driver License Terms]: https://www.ftdichip.com/Drivers/FTDriverLicenceTerms.htm
 //! [FTDI D2XX drivers]: https://www.ftdichip.com/Drivers/D2XX.htm
 //! [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
-//! [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
-//! [bindgen]: https://github.com/rust-lang/rust-bindgen
-//! [cargo-readme]: https://github.com/livioribeiro/cargo-readme
 //! [libftd2xx]: https://github.com/newAM/libftd2xx-rs
-#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.1.3")]
+//! [Rust Edition Guide]: https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html
+#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.1.4")]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]

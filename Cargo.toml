@@ -1,6 +1,6 @@
 [package]
 name = "libftd2xx-ffi"
-version = "0.1.3"  # remember to update html_root_url
+version = "0.1.4"  # remember to update html_root_url
 description = "Rust FFI bindings to the FTDI D2XX drivers."
 keywords = ["ftdi", "ffi", "usb"]
 categories = ["external-ffi-bindings"]

@@ -41,8 +41,11 @@ fn main() {
     let mut search = cwd.clone();
     search.push(paths::SEARCH);
 
-    println!("cargo:rustc-link-search={}", search.to_str().unwrap());
-    println!("cargo:rustc-link-lib=ftd2xx");
+    println!(
+        "cargo:rustc-link-search=native={}",
+        search.to_str().unwrap()
+    );
+    println!("cargo:rustc-link-lib=static=ftd2xx");
     println!("cargo:rerun-if-changed={}", header.to_str().unwrap());
 
     cfg_if::cfg_if! {
