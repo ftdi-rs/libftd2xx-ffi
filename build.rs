@@ -7,23 +7,23 @@ use bindgen;
 cfg_if::cfg_if! {
     if #[cfg(all(target_os = "linux", target_arch = "x86_64"))] {
         mod paths {
-            pub const HEADER: &str = "libftd2xx_src/linux/x64/ftd2xx.h";
-            pub const SEARCH: &str = "libftd2xx_src/linux/x64/build";
+            pub const HEADER: &str = "vendor/linux/x64/ftd2xx.h";
+            pub const SEARCH: &str = "vendor/linux/x64/build";
         }
     } else if #[cfg(all(target_os = "linux", target_arch = "x86"))] {
         mod paths {
-            pub const HEADER: &str = "libftd2xx_src/linux/x86/ftd2xx.h";
-            pub const SEARCH: &str = "libftd2xx_src/linux/x86/build";
+            pub const HEADER: &str = "vendor/linux/x86/ftd2xx.h";
+            pub const SEARCH: &str = "vendor/linux/x86/build";
         }
     } else if #[cfg(all(target_os = "windows", target_arch = "x86_64"))] {
         mod paths {
-            pub const HEADER: &str = "libftd2xx_src/windows/ftd2xx.h";
-            pub const SEARCH: &str = "libftd2xx_src/windows/amd64";
+            pub const HEADER: &str = "vendor/windows/ftd2xx.h";
+            pub const SEARCH: &str = "vendor/windows/amd64";
         }
     } else if #[cfg(all(target_os = "windows", target_arch = "x86"))] {
         mod paths {
-            pub const HEADER: &str = "libftd2xx_src/windows/ftd2xx.h";
-            pub const SEARCH: &str = "libftd2xx_src/windows/i386";
+            pub const HEADER: &str = "vendor/windows/ftd2xx.h";
+            pub const SEARCH: &str = "vendor/windows/i386";
         }
     } else {
         std::compile_error!(
