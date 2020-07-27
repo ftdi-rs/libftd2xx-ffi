@@ -26,11 +26,7 @@ cfg_if::cfg_if! {
             pub const SEARCH: &str = "vendor/windows/i386";
         }
     } else {
-        std::compile_error!(
-            "Unsupported target, please open an issue. \
-            target_os = {}, target_arch = {}",
-            target_os, target_arch
-        );
+        std::compile_error!("Unsupported target, please open an issue.");
     }
 }
 

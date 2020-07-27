@@ -10,7 +10,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = "~0.2.0"
+//! libftd2xx-ffi = "~0.2.1"
 //! ```
 //!
 //! The default feature set will use pre-generated bindings.
@@ -20,24 +20,17 @@
 //! feature flag.
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = { version = "~0.2.0", features = ["bindgen"] }
+//! libftd2xx-ffi = { version = "~0.2.1", features = ["bindgen"] }
 //! ```
 //!
 //! Bindgen has additional dependencies that must be installed in order to
 //! compile successfully, see the [bindgen requirements] page for more details.
 //!
-//! # Performance
+//! # Supported Targets
 //!
-//! From the [Rust Edition Guide].
-//!
-//! > By default, Rust will statically link all Rust code.
-//! > However, if you use the standard library,
-//! > it will dynamically link to the system's `libc` implementation.
-//! > If you'd like a 100% static binary, the `MUSL libc` can be used on Linux.
-//!
-//! On Linux I have found that compiling with
-//! `--target x86_64-unknown-linux-musl`
-//! can significantly improve runtime performance with this crate.
+//! * `x86_64-pc-windows-msvc`
+//! * `x86_64-unknown-linux-gnu`
+//! * `x86_64-unknown-linux-musl`
 //!
 //! # References
 //!
@@ -88,7 +81,7 @@
 //! [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
 //! [libftd2xx]: https://github.com/newAM/libftd2xx-rs
 //! [Rust Edition Guide]: https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html
-#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.2.0")]
+#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.2.1")]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
@@ -103,10 +96,8 @@ cfg_if! {
     } else if #[cfg(all(target_os = "windows", target_arch = "x86_64"))] {
         include!("bindings_windows_x64.rs");
     } else {
-        std::compile_error(
-            "No pre-generated bindings for target_os = {}, target_arch = {}",
-            target_os,
-            target_arch
+        std::compile_error!(
+            "No pre-generated bindings avaliable for this target.",
         );
     }
 }
