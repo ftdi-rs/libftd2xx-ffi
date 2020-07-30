@@ -17,7 +17,7 @@ The static library is distributed in this crate with permission from FTDI.
 
 ```toml
 [dependencies]
-libftd2xx-ffi = "~0.2.1"
+libftd2xx-ffi = "~0.2.2"
 ```
 
 The default feature set will use pre-generated bindings.
@@ -27,7 +27,7 @@ The bindings can also be generated during compilation using the [bindgen]
 feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.2.1", features = ["bindgen"] }
+libftd2xx-ffi = { version = "~0.2.2", features = ["bindgen"] }
 ```
 
 Bindgen has additional dependencies that must be installed in order to
@@ -55,12 +55,12 @@ See [FTDI Drivers Installation Guide for Linux] for more details.
 
 ## License
 FTDI provides the D2XX driver as a compiled library and a header file.
-These files can be found within the `libftd2xx_src` directory.
+These files can be found within the `vendor` directory.
 
-The code within the `libftd2xx_src` directory is licensed by FTDI.
+The code within the `vendor` directory is licensed by FTDI.
 Please see the [Driver License Terms] page for their license.
 
-All code outside of the `libftd2xx_src` directory is MIT licensed.
+All code outside of the `vendor` directory is MIT licensed.
 
 ## Maintainers Notes
 ### README Generation

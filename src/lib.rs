@@ -10,7 +10,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = "~0.2.1"
+//! libftd2xx-ffi = "~0.2.2"
 //! ```
 //!
 //! The default feature set will use pre-generated bindings.
@@ -20,7 +20,7 @@
 //! feature flag.
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = { version = "~0.2.1", features = ["bindgen"] }
+//! libftd2xx-ffi = { version = "~0.2.2", features = ["bindgen"] }
 //! ```
 //!
 //! Bindgen has additional dependencies that must be installed in order to
@@ -48,12 +48,12 @@
 //!
 //! # License
 //! FTDI provides the D2XX driver as a compiled library and a header file.
-//! These files can be found within the `libftd2xx_src` directory.
+//! These files can be found within the `vendor` directory.
 //!
-//! The code within the `libftd2xx_src` directory is licensed by FTDI.
+//! The code within the `vendor` directory is licensed by FTDI.
 //! Please see the [Driver License Terms] page for their license.
 //!
-//! All code outside of the `libftd2xx_src` directory is MIT licensed.
+//! All code outside of the `vendor` directory is MIT licensed.
 //!
 //! # Maintainers Notes
 //! ## README Generation
@@ -81,7 +81,7 @@
 //! [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
 //! [libftd2xx]: https://github.com/newAM/libftd2xx-rs
 //! [Rust Edition Guide]: https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html
-#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.2.1")]
+#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.2.2")]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
