@@ -10,7 +10,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = "~0.2.2"
+//! libftd2xx-ffi = "~0.2.3"
 //! ```
 //!
 //! The default feature set will use pre-generated bindings.
@@ -20,7 +20,7 @@
 //! feature flag.
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = { version = "~0.2.2", features = ["bindgen"] }
+//! libftd2xx-ffi = { version = "~0.2.3", features = ["bindgen"] }
 //! ```
 //!
 //! Bindgen has additional dependencies that must be installed in order to
@@ -81,23 +81,26 @@
 //! [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
 //! [libftd2xx]: https://github.com/newAM/libftd2xx-rs
 //! [Rust Edition Guide]: https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html
-#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.2.2")]
+#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.2.3")]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
-use cfg_if::cfg_if;
+#[cfg(feature = "bindgen")]
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
-cfg_if! {
-    if #[cfg(feature = "bindgen")] {
-        include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
-    } else if #[cfg(all(target_os = "linux", target_arch = "x86_64"))] {
-        include!("bindings_linux_x64.rs");
-    } else if #[cfg(all(target_os = "windows", target_arch = "x86_64"))] {
-        include!("bindings_windows_x64.rs");
-    } else {
-        std::compile_error!(
-            "No pre-generated bindings avaliable for this target.",
-        );
-    }
-}
+#[cfg(all(not(feature = "bindgen"), target_os = "linux", target_arch = "x86_64"))]
+include!("bindings_linux_x64.rs");
+
+#[cfg(all(
+    not(feature = "bindgen"),
+    target_os = "windows",
+    target_arch = "x86_64"
+))]
+include!("bindings_windows_x64.rs");
+
+#[cfg(all(not(feature = "bindgen"), target_os = "linux", target_arch = "x86"))]
+std::compile_error!("No pregenerated bindings avaliable for this target");
+
+#[cfg(all(not(feature = "bindgen"), target_os = "windows", target_arch = "x86"))]
+std::compile_error!("No pregenerated bindings avaliable for this target");

@@ -1,6 +1,6 @@
 [package]
 name = "libftd2xx-ffi"
-version = "0.2.2"  # remember to update html_root_url
+version = "0.2.3"  # remember to update html_root_url
 description = "Rust FFI bindings to the FTDI D2XX drivers."
 keywords = ["ftdi", "ffi", "usb"]
 categories = ["external-ffi-bindings"]
@@ -12,12 +12,8 @@ repository = "https://github.com/newAM/libftd2xx-ffi-rs/"
 documentation = "https://docs.rs/libftd2xx-ffi"
 license = "MIT"
 
-[dependencies]
-cfg-if = "~0.1.10"
-
 [build-dependencies]
 bindgen = { version = "~0.54.1", optional = true }
-cfg-if = "~0.1.10"
 
 [dev-dependencies]
 version-sync = "~0.9.1"

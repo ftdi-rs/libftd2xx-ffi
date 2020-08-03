@@ -4,30 +4,28 @@ use std::env;
 #[cfg(feature = "bindgen")]
 use bindgen;
 
-cfg_if::cfg_if! {
-    if #[cfg(all(target_os = "linux", target_arch = "x86_64"))] {
-        mod paths {
-            pub const HEADER: &str = "vendor/linux/x64/ftd2xx.h";
-            pub const SEARCH: &str = "vendor/linux/x64/build";
-        }
-    } else if #[cfg(all(target_os = "linux", target_arch = "x86"))] {
-        mod paths {
-            pub const HEADER: &str = "vendor/linux/x86/ftd2xx.h";
-            pub const SEARCH: &str = "vendor/linux/x86/build";
-        }
-    } else if #[cfg(all(target_os = "windows", target_arch = "x86_64"))] {
-        mod paths {
-            pub const HEADER: &str = "vendor/windows/ftd2xx.h";
-            pub const SEARCH: &str = "vendor/windows/amd64";
-        }
-    } else if #[cfg(all(target_os = "windows", target_arch = "x86"))] {
-        mod paths {
-            pub const HEADER: &str = "vendor/windows/ftd2xx.h";
-            pub const SEARCH: &str = "vendor/windows/i386";
-        }
-    } else {
-        std::compile_error!("Unsupported target, please open an issue.");
-    }
+#[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+mod paths {
+    pub const HEADER: &str = "vendor/linux/x64/ftd2xx.h";
+    pub const SEARCH: &str = "vendor/linux/x64/build";
+}
+
+#[cfg(all(target_os = "linux", target_arch = "x86"))]
+mod paths {
+    pub const HEADER: &str = "vendor/linux/x86/ftd2xx.h";
+    pub const SEARCH: &str = "vendor/linux/x86/build";
+}
+
+#[cfg(all(target_os = "windows", target_arch = "x86_64"))]
+mod paths {
+    pub const HEADER: &str = "vendor/windows/ftd2xx.h";
+    pub const SEARCH: &str = "vendor/windows/amd64";
+}
+
+#[cfg(all(target_os = "windows", target_arch = "x86"))]
+mod paths {
+    pub const HEADER: &str = "vendor/windows/ftd2xx.h";
+    pub const SEARCH: &str = "vendor/windows/i386";
 }
 
 fn main() {
@@ -44,8 +42,8 @@ fn main() {
     println!("cargo:rustc-link-lib=static=ftd2xx");
     println!("cargo:rerun-if-changed={}", header.to_str().unwrap());
 
-    cfg_if::cfg_if! {
-        if #[cfg(feature = "bindgen")] {
+    #[cfg(feature = "bindgen")]
+    {
         let bindings = bindgen::Builder::default()
             .header(header.to_str().unwrap())
             .whitelist_function("FT_.*")
@@ -60,6 +58,5 @@ fn main() {
         bindings
             .write_to_file(out_path.join("bindings.rs"))
             .expect("Couldn't write bindings!");
-        }
     }
 }

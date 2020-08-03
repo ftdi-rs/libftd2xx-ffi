@@ -1,7 +1,7 @@
 ![Maintenance](https://img.shields.io/badge/maintenance-passively--maintained-yellowgreen.svg)
 [![crates.io](https://img.shields.io/crates/v/libftd2xx-ffi.svg)](https://crates.io/crates/libftd2xx-ffi)
 [![docs.rs](https://docs.rs/libftd2xx-ffi/badge.svg)](https://docs.rs/libftd2xx-ffi/)
-[![Build Status](https://travis-ci.org/newAM/libftd2xx-ffi-rs.svg?branch=master)](https://travis-ci.com/newAM/libftd2xx-ffi-rs)
+[![Build Status](https://travis-ci.com/newAM/libftd2xx-ffi-rs.svg?branch=master)](https://travis-ci.com/newAM/libftd2xx-ffi-rs)
 
 # libftd2xx-ffi
 
@@ -17,7 +17,7 @@ The static library is distributed in this crate with permission from FTDI.
 
 ```toml
 [dependencies]
-libftd2xx-ffi = "~0.2.2"
+libftd2xx-ffi = "~0.2.3"
 ```
 
 The default feature set will use pre-generated bindings.
@@ -27,7 +27,7 @@ The bindings can also be generated during compilation using the [bindgen]
 feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.2.2", features = ["bindgen"] }
+libftd2xx-ffi = { version = "~0.2.3", features = ["bindgen"] }
 ```
 
 Bindgen has additional dependencies that must be installed in order to
