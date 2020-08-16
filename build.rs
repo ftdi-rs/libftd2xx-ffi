@@ -50,6 +50,7 @@ fn main() {
             .whitelist_type("FT_.*")
             .whitelist_var("FT_.*")
             .rustfmt_bindings(true)
+            .derive_default(true)
             .parse_callbacks(Box::new(bindgen::CargoCallbacks))
             .generate()
             .expect("Unable to generate bindings");
