@@ -28,9 +28,9 @@
 //!
 //! # Supported Targets
 //!
-//! * `x86_64-pc-windows-msvc`
-//! * `x86_64-unknown-linux-gnu`
-//! * `x86_64-unknown-linux-musl`
+//! * `x86_64-pc-windows-msvc` (dynamic linking only)
+//! * `x86_64-unknown-linux-gnu` (static linking only)
+//! * `x86_64-unknown-linux-musl` (static linking only)
 //!
 //! # References
 //!
