@@ -29,10 +29,8 @@ matrix:
     - env: TARGET=x86_64-pc-windows-msvc
       os: windows
       rust: nightly
-cache: cargo
-before_cache:
-  # Travis can't cache files that are not readable by "others"
-  - chmod -R a+r $HOME/.cargo
+  allow_failures:
+    - rust: nightly
 script:
   - |
     if [ "$TRAVIS_OS_NAME" = "windows" ]; then
