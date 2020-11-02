@@ -1,8 +1,4 @@
-#[deny(unsafe_code)]
 use std::env;
-
-#[cfg(feature = "bindgen")]
-use bindgen;
 
 #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
 mod paths {
@@ -32,7 +28,7 @@ fn main() {
     let cwd = env::current_dir().unwrap();
     let mut header = cwd.clone();
     header.push(paths::HEADER);
-    let mut search = cwd.clone();
+    let mut search = cwd;
     search.push(paths::SEARCH);
 
     println!(
