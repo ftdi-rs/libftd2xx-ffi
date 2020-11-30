@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Added a changlog.
+- Added a changelog.
+
 ### Changed
 - Clarified per-target linking.
-### Removed
-
+- Update bindgen to 0.56
 
 [Unreleased]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.4.0...HEAD
