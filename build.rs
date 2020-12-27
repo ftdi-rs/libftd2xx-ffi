@@ -1,35 +1,43 @@
 use std::env;
 
-#[cfg(all(target_os = "linux", target_arch = "x86_64"))]
-mod paths {
-    pub const HEADER: &str = "vendor/linux/x64/ftd2xx.h";
-    pub const SEARCH: &str = "vendor/linux/x64/build";
+#[cfg(target_os = "linux")]
+fn search_path<'a>() -> &'a str {
+    match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+        "x86_64" => "vendor/linux/x64/build",
+        "x86" => "vendor/linux/x86/build",
+        _ => unreachable!(),
+    }
 }
 
-#[cfg(all(target_os = "linux", target_arch = "x86"))]
-mod paths {
-    pub const HEADER: &str = "vendor/linux/x86/ftd2xx.h";
-    pub const SEARCH: &str = "vendor/linux/x86/build";
+#[cfg(target_os = "linux")]
+fn header_path<'a>() -> &'a str {
+    match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+        "x86_64" => "vendor/linux/x64/ftd2xx.h",
+        "x86" => "vendor/linux/x86/ftd2xx.h",
+        _ => unreachable!(),
+    }
 }
 
-#[cfg(all(target_os = "windows", target_arch = "x86_64"))]
-mod paths {
-    pub const HEADER: &str = "vendor/windows/ftd2xx.h";
-    pub const SEARCH: &str = "vendor/windows/amd64";
+#[cfg(target_os = "windows")]
+fn search_path<'a>() -> &'a str {
+    match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+        "x86_64" => "vendor/windows/amd64",
+        "x86" => "vendor/windows/i386",
+        _ => unreachable!(),
+    }
 }
 
-#[cfg(all(target_os = "windows", target_arch = "x86"))]
-mod paths {
-    pub const HEADER: &str = "vendor/windows/ftd2xx.h";
-    pub const SEARCH: &str = "vendor/windows/i386";
+#[cfg(target_os = "windows")]
+fn header_path<'a>() -> &'a str {
+    "vendor/windows/ftd2xx.h"
 }
 
 fn main() {
     let cwd = env::current_dir().unwrap();
     let mut header = cwd.clone();
-    header.push(paths::HEADER);
+    header.push(header_path());
     let mut search = cwd;
-    search.push(paths::SEARCH);
+    search.push(search_path());
 
     println!(
         "cargo:rustc-link-search=native={}",
