@@ -76,15 +76,15 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 #[cfg(all(not(feature = "bindgen"), target_os = "linux", target_arch = "x86_64"))]
 include!("bindings_linux_x64.rs");
 
+#[cfg(all(not(feature = "bindgen"), target_os = "linux", target_arch = "x86"))]
+include!("bindings_linux_x86.rs");
+
 #[cfg(all(
     not(feature = "bindgen"),
     target_os = "windows",
     target_arch = "x86_64"
 ))]
 include!("bindings_windows_x64.rs");
-
-#[cfg(all(not(feature = "bindgen"), target_os = "linux", target_arch = "x86"))]
-std::compile_error!("No pregenerated bindings avaliable for this target");
 
 #[cfg(all(not(feature = "bindgen"), target_os = "windows", target_arch = "x86"))]
 std::compile_error!("No pregenerated bindings avaliable for this target");

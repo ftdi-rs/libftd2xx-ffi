@@ -10,25 +10,35 @@ jobs:
 
   linux_build:
     name: Linux Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        target: ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu"]
+        target:
+          - "x86_64-unknown-linux-musl"
+          - "x86_64-unknown-linux-gnu"
+          - "i686-unknown-linux-gnu"
+          - "i686-unknown-linux-musl"
     steps:
       - name: Install bindgen dependencies
         run: sudo apt install llvm-dev libclang-dev clang
+      - name: Install target dependencies
+        run: sudo apt install libc6-dev-i386
+        if: ${{ contains(matrix.target, 'i686') }}
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           target: ${{ matrix.target }}
-      - run: RUSTFLAGS="-D warnings" cargo build
-      - run: RUSTFLAGS="-D warnings" cargo build --features=bindgen
+      - run: RUSTFLAGS="-D warnings" cargo build --target ${{ matrix.target }}
+      - run: RUSTFLAGS="-D warnings" cargo build --features=bindgen  --target ${{ matrix.target }}
       - run: cargo doc
 
   windows_build:
     name: Windows Build
     runs-on: windows-latest
+    strategy:
+      matrix:
+        target: ["x86_64-pc-windows-msvc"]
     env:
       RUSTFLAGS: "-D warnings"
     steps:
@@ -36,38 +46,48 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          target: x86_64-pc-windows-msvc
-      - run: cargo build
+          target: ${{ matrix.target }}
+      - run: cargo build --target ${{ matrix.target }}
       - run: cargo doc
 
   linux_test:
     name: Linux Unit Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        target: ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu"]
+        target:
+          - "x86_64-unknown-linux-musl"
+          - "x86_64-unknown-linux-gnu"
+          - "i686-unknown-linux-gnu"
+          - "i686-unknown-linux-musl"
+    steps:
+      - name: Install target dependencies
+        run: sudo apt install libc6-dev-i386
+        if: ${{ contains(matrix.target, 'i686') }}
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: ${{ matrix.target }}
+      - run: cargo test --target ${{ matrix.target }}
+
+  windows_test:
+    name: Windows Unit Tests
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        target: ["x86_64-pc-windows-msvc"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           target: ${{ matrix.target }}
-      - run: cargo test
-
-  windows_test:
-    name: Windows Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: x86_64-pc-windows-msvc
-      - run: cargo test
+      - run: cargo test --target ${{ matrix.target }}
 
   clippy_check:
     name: Clippy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -81,7 +101,7 @@ jobs:
 
   format_check:
     name: Rust Format
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -100,7 +120,7 @@ jobs:
       - linux_test
       - windows_build
       - windows_test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
