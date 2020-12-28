@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added pre-generated bindings for `i686-unknown-linux` targets.
 - Added pre-generated bindings for the `i686-pc-windows-msvc` target.
+- Added support for `arm-unknown-linux`, `armv7-unknown-linux`, and `aarch64-unknown-linux` targets.
 
 ## [0.4.1] - 2020-12-27
 ### Added

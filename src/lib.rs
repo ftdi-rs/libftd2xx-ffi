@@ -28,9 +28,26 @@
 //!
 //! # Supported Targets
 //!
+//! ## Tested Targets
+//!
 //! * `x86_64-pc-windows-msvc` (dynamic linking only)
 //! * `x86_64-unknown-linux-gnu` (static linking only)
 //! * `x86_64-unknown-linux-musl` (static linking only)
+//!
+//! ## Untested Targets
+//!
+//! These targets are provided, but they are untested.
+//! Use at your own risk.
+//!
+//! * `aarch64-unknown-linux-gnu`
+//! * `aarch64-unknown-linux-musl`
+//! * `arm-unknown-linux-gnueabihf`
+//! * `arm-unknown-linux-musleabihf`
+//! * `armv7-unknown-linux-gnueabihf`
+//! * `armv7-unknown-linux-musleabihf`
+//! * `i686-pc-windows-msvc`
+//! * `i686-unknown-linux-gnu`
+//! * `i686-unknown-linux-musl`
 //!
 //! # References
 //!
@@ -55,6 +72,10 @@
 //!
 //! All code outside of the `vendor` directory is MIT licensed.
 //!
+//! **Note:** This crate is not affiliated with FTDI.
+//! You will need to contact the vendor for any support requests with the
+//! underlying library because it is closed source.
+//!
 //! [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
 //! [bindgen]: https://github.com/rust-lang/rust-bindgen
 //! [D2XX Drivers Download Page]: https://www.ftdichip.com/Drivers/D2XX.htm
@@ -70,21 +91,22 @@
 #![allow(non_snake_case)]
 #![allow(clippy::too_many_arguments)]
 
-#[cfg(feature = "bindgen")]
-include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
-
-#[cfg(all(not(feature = "bindgen"), target_os = "linux", target_arch = "x86_64"))]
-include!("bindings_linux_x64.rs");
-
-#[cfg(all(not(feature = "bindgen"), target_os = "linux", target_arch = "x86"))]
-include!("bindings_linux_x86.rs");
-
-#[cfg(all(
-    not(feature = "bindgen"),
-    target_os = "windows",
-    target_arch = "x86_64"
-))]
-include!("bindings_windows_x64.rs");
-
-#[cfg(all(not(feature = "bindgen"), target_os = "windows", target_arch = "x86"))]
-include!("bindings_windows_x86.rs");
+cfg_if::cfg_if! {
+    if #[cfg(feature = "bindgen")] {
+        include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+    } else if #[cfg(all(target_os = "linux", target_arch = "x86_64"))] {
+        include!("bindings_linux_x64.rs");
+    } else if #[cfg(all(target_os = "linux", target_arch = "x86"))] {
+        include!("bindings_linux_x86.rs");
+    } else if #[cfg(all(target_os = "windows", target_arch = "x86_64"))] {
+        include!("bindings_windows_x64.rs");
+    } else if #[cfg(all(target_os = "windows", target_arch = "x86"))] {
+        include!("bindings_windows_x86.rs");
+    } else if #[cfg(any(target_os = "linux", target_arch = "arm"))] {
+        include!("bindings_linux_armv6.rs");
+    } else if #[cfg(any(target_os = "linux", target_arch = "aarch64"))] {
+        include!("bindings_linux_armv8.rs");
+    } else {
+        std::compile_error!("pre-generated bindings are not avaliable for your target");
+    }
+}

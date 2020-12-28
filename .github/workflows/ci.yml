@@ -18,12 +18,24 @@ jobs:
           - "x86_64-unknown-linux-gnu"
           - "i686-unknown-linux-gnu"
           - "i686-unknown-linux-musl"
+          - "arm-unknown-linux-musleabihf"
+          - "arm-unknown-linux-gnueabihf"
+          - "armv7-unknown-linux-musleabihf"
+          - "armv7-unknown-linux-gnueabihf"
+          - "aarch64-unknown-linux-musl"
+          - "aarch64-unknown-linux-gnu"
     steps:
       - name: Install bindgen dependencies
         run: sudo apt install llvm-dev libclang-dev clang
-      - name: Install target dependencies
+      - name: Install libc6-dev-i386
         run: sudo apt install libc6-dev-i386
         if: ${{ contains(matrix.target, 'i686') }}
+      - name: Install libc6-dev-armhf-cross
+        run: sudo apt install libc6-dev-armhf-cross
+        if: ${{ contains(matrix.target, 'arm') }}
+      - name: Install libc6-dev-arm64-cross
+        run: sudo apt install libc6-dev-arm64-cross
+        if: ${{ contains(matrix.target, 'aarch64') }}
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:

@@ -19,6 +19,9 @@ exclude = [
     "vendor/linux/**/libusb",
 ]
 
+[dependencies]
+cfg-if = "^1.0.0"
+
 [build-dependencies]
 bindgen = { version = "~0.56.0", optional = true }
 
