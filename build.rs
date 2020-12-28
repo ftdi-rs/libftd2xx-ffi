@@ -1,35 +1,31 @@
 use std::env;
 
-#[cfg(target_os = "linux")]
 fn search_path<'a>() -> &'a str {
-    match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-        "x86_64" => "vendor/linux/x64/build",
-        "x86" => "vendor/linux/x86/build",
-        _ => unreachable!(),
+    match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
+        "windows" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+            "x86_64" => "vendor/windows/amd64",
+            "x86" => "vendor/windows/i386",
+            target_arch => panic!("Target architecture not supported: {}", target_arch),
+        },
+        "linux" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+            "x86_64" => "vendor/linux/x64/build",
+            "x86" => "vendor/linux/x86/build",
+            target_arch => panic!("Target architecture not supported: {}", target_arch),
+        },
+        target_os => panic!("Target OS not supported: {}", target_os),
     }
 }
 
-#[cfg(target_os = "linux")]
 fn header_path<'a>() -> &'a str {
-    match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-        "x86_64" => "vendor/linux/x64/ftd2xx.h",
-        "x86" => "vendor/linux/x86/ftd2xx.h",
-        _ => unreachable!(),
+    match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
+        "windows" => "vendor/windows/ftd2xx.h",
+        "linux" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+            "x86_64" => "vendor/linux/x64/ftd2xx.h",
+            "x86" => "vendor/linux/x86/ftd2xx.h",
+            target_arch => panic!("Target architecture not supported: {}", target_arch),
+        },
+        target_os => panic!("Target OS not supported: {}", target_os),
     }
-}
-
-#[cfg(target_os = "windows")]
-fn search_path<'a>() -> &'a str {
-    match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-        "x86_64" => "vendor/windows/amd64",
-        "x86" => "vendor/windows/i386",
-        _ => unreachable!(),
-    }
-}
-
-#[cfg(target_os = "windows")]
-fn header_path<'a>() -> &'a str {
-    "vendor/windows/ftd2xx.h"
 }
 
 fn main() {

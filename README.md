@@ -17,7 +17,7 @@ The static library is distributed in this crate with permission from FTDI.
 
 ```toml
 [dependencies]
-libftd2xx-ffi = "~0.4.0"
+libftd2xx-ffi = "~0.4.1"
 ```
 
 The default feature set will use pre-generated bindings.
@@ -27,7 +27,7 @@ The bindings can also be generated during compilation using the [bindgen]
 feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.4.0", features = ["bindgen"] }
+libftd2xx-ffi = { version = "~0.4.1", features = ["bindgen"] }
 ```
 
 Bindgen has additional dependencies that must be installed in order to
