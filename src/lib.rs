@@ -87,4 +87,4 @@ include!("bindings_linux_x86.rs");
 include!("bindings_windows_x64.rs");
 
 #[cfg(all(not(feature = "bindgen"), target_os = "windows", target_arch = "x86"))]
-std::compile_error!("No pregenerated bindings avaliable for this target");
+include!("bindings_windows_x86.rs");
