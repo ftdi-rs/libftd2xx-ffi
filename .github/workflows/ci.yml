@@ -38,7 +38,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        target: ["x86_64-pc-windows-msvc"]
+        target: ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
     env:
       RUSTFLAGS: "-D warnings"
     steps:
