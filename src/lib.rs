@@ -10,7 +10,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = "~0.4.1"
+//! libftd2xx-ffi = "~0.5.0"
 //! ```
 //!
 //! The default feature set will use pre-generated bindings.
@@ -20,7 +20,7 @@
 //! feature flag.
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = { version = "~0.4.1", features = ["bindgen"] }
+//! libftd2xx-ffi = { version = "~0.5.0", features = ["bindgen"] }
 //! ```
 //!
 //! Bindgen has additional dependencies that must be installed in order to
@@ -39,15 +39,15 @@
 //! These targets are provided, but they are untested.
 //! Use at your own risk.
 //!
-//! * `aarch64-unknown-linux-gnu`
-//! * `aarch64-unknown-linux-musl`
-//! * `arm-unknown-linux-gnueabihf`
-//! * `arm-unknown-linux-musleabihf`
-//! * `armv7-unknown-linux-gnueabihf`
-//! * `armv7-unknown-linux-musleabihf`
-//! * `i686-pc-windows-msvc`
-//! * `i686-unknown-linux-gnu`
-//! * `i686-unknown-linux-musl`
+//! * `aarch64-unknown-linux-gnu` (static linking only)
+//! * `aarch64-unknown-linux-musl` (static linking only)
+//! * `arm-unknown-linux-gnueabihf` (static linking only)
+//! * `arm-unknown-linux-musleabihf` (static linking only)
+//! * `armv7-unknown-linux-gnueabihf` (static linking only)
+//! * `armv7-unknown-linux-musleabihf` (static linking only)
+//! * `i686-pc-windows-msvc` (dynamic linking only)
+//! * `i686-unknown-linux-gnu` (static linking only)
+//! * `i686-unknown-linux-musl` (static linking only)
 //!
 //! # References
 //!
@@ -85,7 +85,7 @@
 //! [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
 //! [libftd2xx]: https://github.com/newAM/libftd2xx-rs
 //! [Rust Edition Guide]: https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html
-#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.4.1")]
+#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.5.0")]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]

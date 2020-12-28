@@ -17,7 +17,7 @@ The static library is distributed in this crate with permission from FTDI.
 
 ```toml
 [dependencies]
-libftd2xx-ffi = "~0.4.1"
+libftd2xx-ffi = "~0.5.0"
 ```
 
 The default feature set will use pre-generated bindings.
@@ -27,7 +27,7 @@ The bindings can also be generated during compilation using the [bindgen]
 feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.4.1", features = ["bindgen"] }
+libftd2xx-ffi = { version = "~0.5.0", features = ["bindgen"] }
 ```
 
 Bindgen has additional dependencies that must be installed in order to
@@ -46,15 +46,15 @@ compile successfully, see the [bindgen requirements] page for more details.
 These targets are provided, but they are untested.
 Use at your own risk.
 
-* `aarch64-unknown-linux-gnu`
-* `aarch64-unknown-linux-musl`
-* `arm-unknown-linux-gnueabihf`
-* `arm-unknown-linux-musleabihf`
-* `armv7-unknown-linux-gnueabihf`
-* `armv7-unknown-linux-musleabihf`
-* `i686-pc-windows-msvc`
-* `i686-unknown-linux-gnu`
-* `i686-unknown-linux-musl`
+* `aarch64-unknown-linux-gnu` (static linking only)
+* `aarch64-unknown-linux-musl` (static linking only)
+* `arm-unknown-linux-gnueabihf` (static linking only)
+* `arm-unknown-linux-musleabihf` (static linking only)
+* `armv7-unknown-linux-gnueabihf` (static linking only)
+* `armv7-unknown-linux-musleabihf` (static linking only)
+* `i686-pc-windows-msvc` (dynamic linking only)
+* `i686-unknown-linux-gnu` (static linking only)
+* `i686-unknown-linux-musl` (static linking only)
 
 ## References
 
