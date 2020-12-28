@@ -35,9 +35,26 @@ compile successfully, see the [bindgen requirements] page for more details.
 
 ## Supported Targets
 
+### Tested Targets
+
 * `x86_64-pc-windows-msvc` (dynamic linking only)
 * `x86_64-unknown-linux-gnu` (static linking only)
 * `x86_64-unknown-linux-musl` (static linking only)
+
+### Untested Targets
+
+These targets are provided, but they are untested.
+Use at your own risk.
+
+* `aarch64-unknown-linux-gnu`
+* `aarch64-unknown-linux-musl`
+* `arm-unknown-linux-gnueabihf`
+* `arm-unknown-linux-musleabihf`
+* `armv7-unknown-linux-gnueabihf`
+* `armv7-unknown-linux-musleabihf`
+* `i686-pc-windows-msvc`
+* `i686-unknown-linux-gnu`
+* `i686-unknown-linux-musl`
 
 ## References
 
@@ -61,6 +78,10 @@ The code within the `vendor` directory is licensed by FTDI.
 Please see the [Driver License Terms] page for their license.
 
 All code outside of the `vendor` directory is MIT licensed.
+
+**Note:** This crate is not affiliated with FTDI.
+You will need to contact the vendor for any support requests with the
+underlying library because it is closed source.
 
 [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
 [bindgen]: https://github.com/rust-lang/rust-bindgen
