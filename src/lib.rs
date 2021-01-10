@@ -102,9 +102,9 @@ cfg_if::cfg_if! {
         include!("bindings_windows_x64.rs");
     } else if #[cfg(all(target_os = "windows", target_arch = "x86"))] {
         include!("bindings_windows_x86.rs");
-    } else if #[cfg(any(target_os = "linux", target_arch = "arm"))] {
+    } else if #[cfg(all(target_os = "linux", target_arch = "arm"))] {
         include!("bindings_linux_armv6.rs");
-    } else if #[cfg(any(target_os = "linux", target_arch = "aarch64"))] {
+    } else if #[cfg(all(target_os = "linux", target_arch = "aarch64"))] {
         include!("bindings_linux_armv8.rs");
     } else {
         std::compile_error!("pre-generated bindings are not avaliable for your target");
