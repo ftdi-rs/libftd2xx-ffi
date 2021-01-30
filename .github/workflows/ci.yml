@@ -25,6 +25,8 @@ jobs:
           - "aarch64-unknown-linux-musl"
           - "aarch64-unknown-linux-gnu"
     steps:
+      - name: Update sources
+        run: sudo apt update
       - name: Install bindgen dependencies
         run: sudo apt install llvm-dev libclang-dev clang
       - name: Install libc6-dev-i386
@@ -73,6 +75,8 @@ jobs:
           - "i686-unknown-linux-gnu"
           - "i686-unknown-linux-musl"
     steps:
+      - name: Update sources
+        run: sudo apt update
       - name: Install target dependencies
         run: sudo apt install libc6-dev-i386
         if: ${{ contains(matrix.target, 'i686') }}
