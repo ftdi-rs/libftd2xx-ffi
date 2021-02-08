@@ -14,12 +14,14 @@ the unsafe C bindings.
 ## Usage
 Simply add this crate as a dependency in your `Cargo.toml`.
 The static library is distributed in this crate with permission from FTDI.
+The default feature set will use dynamic linking.
 
 ```toml
 [dependencies]
 libftd2xx-ffi = "~0.6.0"
 ```
 
+### Bindgen
 The default feature set will use pre-generated bindings.
 This is only available for Windows x86_64 and Linux x86_64 platforms.
 
@@ -33,28 +35,49 @@ libftd2xx-ffi = { version = "~0.6.0", features = ["bindgen"] }
 Bindgen has additional dependencies that must be installed in order to
 compile successfully, see the [bindgen requirements] page for more details.
 
+### Static Linking
+Static linking the FTD2XX library into this crate can be done by using
+the ["static"] feature flag.
+```toml
+[dependencies]
+libftd2xx-ffi = { version = "~0.6.0", features = ["static"] }
+```
+For GNU/Linux users, no further work is needed. Technically this may be preferred.
+However there may be license incompatibilities (static linking with GPL code).
+If in doubt, check the FTDI driver license terms.
+
+On Windows, we rely on MSVC and a manually set the "LIBMSVC_PATH" environment variable.
+For example a possible 2019 Community installation path may be:
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\lib\
+```
+This brings in legacy_stdio_definitions.lib and user32.lib. It seems to play nicely with rust,
+but you may end up with multiple defined symbol errors if using this crate as a c/c++ dependency.
+
 ## Supported Targets
 
 ### Tested Targets
 
-* `x86_64-pc-windows-msvc` (dynamic linking only)
-* `x86_64-unknown-linux-gnu` (static linking only)
-* `x86_64-unknown-linux-musl` (static linking only)
+* `i686-pc-windows-msvc` (dynamic + static)
+* `i686-unknown-linux-gnu` (dynamic + static)
+* `i686-unknown-linux-musl` (static)
+* `x86_64-pc-windows-msvc` (dynamic + static)
+* `x86_64-unknown-linux-gnu` (dynamic + static)
+* `x86_64-unknown-linux-musl` (static)
 
 ### Untested Targets
 
 These targets are provided, but they are untested.
 Use at your own risk.
 
-* `aarch64-unknown-linux-gnu` (static linking only)
-* `aarch64-unknown-linux-musl` (static linking only)
-* `arm-unknown-linux-gnueabihf` (static linking only)
-* `arm-unknown-linux-musleabihf` (static linking only)
-* `armv7-unknown-linux-gnueabihf` (static linking only)
-* `armv7-unknown-linux-musleabihf` (static linking only)
-* `i686-pc-windows-msvc` (dynamic linking only)
-* `i686-unknown-linux-gnu` (static linking only)
-* `i686-unknown-linux-musl` (static linking only)
+* `aarch64-unknown-linux-gnu` (dynamic + static)
+* `aarch64-unknown-linux-musl` (dynamic + static)
+* `arm-unknown-linux-gnueabihf` (dynamic + static)
+* `arm-unknown-linux-musleabihf` (dynamic + static)
+* `armv7-unknown-linux-gnueabihf` (dynamic + static)
+* `armv7-unknown-linux-musleabihf` (dynamic + static)
+* `i686-unknown-linux-musl` (dynamic)
+* `x86_64-unknown-linux-musl` (dynamic)
 
 ## References
 

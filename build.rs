@@ -3,8 +3,26 @@ use std::env;
 fn search_path<'a>() -> &'a str {
     match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
         "windows" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => "vendor/windows/amd64",
-            "x86" => "vendor/windows/i386",
+            "x86_64" => {
+                #[cfg(not(feature = "static"))]
+                {
+                    "vendor\\windows\\amd64"
+                }
+                #[cfg(feature = "static")]
+                {
+                    "vendor\\windows\\Static\\amd64"
+                }
+            }
+            "x86" => {
+                #[cfg(not(feature = "static"))]
+                {
+                    "vendor\\windows\\i386"
+                }
+                #[cfg(feature = "static")]
+                {
+                    "vendor\\windows\\Static\\i386"
+                }
+            }
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         "linux" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
@@ -66,6 +84,36 @@ fn clang_args() -> &'static [&'static str] {
     }
 }
 
+#[cfg(not(feature = "static"))]
+fn linker_options() {
+    println!("cargo:rustc-link-lib=dylib=ftd2xx");
+}
+
+#[cfg(feature = "static")]
+fn linker_options() {
+    println!("cargo:rustc-link-lib=static=ftd2xx");
+
+    match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
+        "windows" => {
+            let libmsvc_path = if let Some(libmsvc_path) = env::var_os("LIBMSVC_PATH") {
+                match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+                    "x86_64" => format!("{}{}", libmsvc_path.into_string().unwrap(), "\\x64"),
+                    "x86" => format!("{}{}", libmsvc_path.into_string().unwrap(), "\\x64"),
+                    target_arch => panic!("Target architecture not supported: {}", target_arch),
+                }
+            } else {
+                panic!("LIBMSVC_PATH environment variable not found.");
+            };
+
+            println!("cargo:rustc-link-search=native={}", libmsvc_path);
+            println!("cargo:rustc-link-lib=static=legacy_stdio_definitions");
+            println!("cargo:rustc-link-lib=user32");
+        }
+        "linux" => {}
+        target_os => panic!("Target OS not supported: {}", target_os),
+    }
+}
+
 fn main() {
     let cwd = env::current_dir().unwrap();
     let mut header = cwd.clone();
@@ -77,8 +125,10 @@ fn main() {
         "cargo:rustc-link-search=native={}",
         search.to_str().unwrap()
     );
-    println!("cargo:rustc-link-lib=static=ftd2xx");
+    linker_options();
+
     println!("cargo:rerun-if-changed={}", header.to_str().unwrap());
+    println!("cargo:rerun-if-env-changed=LIBMSVC_PATH");
 
     #[cfg(feature = "bindgen")]
     {
