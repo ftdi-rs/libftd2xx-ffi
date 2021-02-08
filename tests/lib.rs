@@ -1,8 +1,8 @@
-use libftd2xx_ffi::FT_GetLibraryVersion;
-
 #[test]
 #[cfg(not(windows))]
 fn version() {
+    use libftd2xx_ffi::FT_GetLibraryVersion;
+
     let mut dw_library_ver = 0;
 
     let ft_status = unsafe { FT_GetLibraryVersion(&mut dw_library_ver) };
