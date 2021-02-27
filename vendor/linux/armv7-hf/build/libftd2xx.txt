@@ -1,6 +1,6 @@
 Output of 'file' command:
 =========================
-./build/arm-v7-hf/libftd2xx.so.1.4.8: ELF 32-bit LSB  shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, BuildID[sha1]=114ae3d0734c9d9bd1793ef760e70ec9ec228044, not stripped
+./build/arm-v7-hf/libftd2xx.so.1.4.22: ELF 32-bit LSB  shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, BuildID[sha1]=644314c524efc95cba8f57f6a8a3e711b44a8b5f, not stripped
 Output of 'readelf -A' command:
 ===============================
 Attribute Section: aeabi
