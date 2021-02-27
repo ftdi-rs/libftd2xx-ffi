@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated the vendor library from `1.4.8` to `1.4.22` for linux targets.
 
-## [0.5.1] - 2020-12-10
+## [0.5.1] - 2021-01-10
 ### Fixed
 - Fixed a bug with ARM targets selecting the wrong bindings.
 
@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed `build.rs` script to handle cross compilation.
 
 [Unreleased]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.6.0...HEAD
-[0.6.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.6.0...0.5.1
-[0.5.1]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.1...0.5.0
-[0.5.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.0...0.4.1
+[0.6.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.1...0.6.0
+[0.5.1]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.0...0.5.1
+[0.5.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.4.1...0.5.0
 [0.4.1]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.4.0...0.4.1
