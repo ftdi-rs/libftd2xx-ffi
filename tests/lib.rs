@@ -8,6 +8,6 @@ fn version() {
     let ft_status = unsafe { FT_GetLibraryVersion(&mut dw_library_ver) };
     assert_eq!(ft_status, 0);
 
-    // version "1.4.8" is represented as 0x010408
-    assert_eq!(dw_library_ver, 0x01_04_08);
+    // version "1.4.22" is represented as 0x010422
+    assert_eq!(dw_library_ver, 0x01_04_22);
 }

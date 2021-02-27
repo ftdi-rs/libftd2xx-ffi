@@ -152,7 +152,8 @@
 /* #undef USE_UDEV */
 
 /* Version number of package */
-#define VERSION "1.0.20"
+#define VERSION "1.0.22"
+#define LIBUSB_DEBUG 4
 
 /* Oldest Windows version supported */
 /* #undef WINVER */

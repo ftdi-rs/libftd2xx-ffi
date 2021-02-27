@@ -1,5 +1,20 @@
 libftd2xx Release Notes
 
+1.4.22
+Improve response time to fast back-to-back FT_Read operations when data is
+available and buffered. Improve on fix introduced in 1.4.20.
+
+1.4.20
+Fix issue with possible timeout occurring when reading fast bursts of data.
+
+1.4.16
+Fix issue with occasional data loss on very first packet from device when 
+repeatedly opening and closing driver.
+Update libusb to 1.0.22.
+
+1.4.10
+Implement functionality for FT_StopInTask and FT_RestartInTask.
+
 1.4.8
 Fix issue where ports opened within the same process do not show reliably in 
 the FT_CreateDeviceInfoList.
