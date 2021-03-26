@@ -7,12 +7,14 @@
 //! # Usage
 //! Simply add this crate as a dependency in your `Cargo.toml`.
 //! The static library is distributed in this crate with permission from FTDI.
+//! The default feature set will use dynamic linking.
 //!
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = "~0.6.0"
+//! libftd2xx-ffi = "~0.7.0"
 //! ```
 //!
+//! ## Bindgen
 //! The default feature set will use pre-generated bindings.
 //! This is only available for Windows x86_64 and Linux x86_64 platforms.
 //!
@@ -20,34 +22,58 @@
 //! feature flag.
 //! ```toml
 //! [dependencies]
-//! libftd2xx-ffi = { version = "~0.6.0", features = ["bindgen"] }
+//! libftd2xx-ffi = { version = "~0.7.0", features = ["bindgen"] }
 //! ```
 //!
 //! Bindgen has additional dependencies that must be installed in order to
 //! compile successfully, see the [bindgen requirements] page for more details.
 //!
+//! ## Static Linking
+//! Static linking the FTD2XX library into this crate can be done by using
+//! the static feature flag.
+//! ```toml
+//! [dependencies]
+//! libftd2xx-ffi = { version = "~0.7.0", features = ["static"] }
+//! ```
+//! For GNU/Linux users, no further work is needed.
+//! Technically this may be preferred, however there may be license
+//! incompatibilities (static linking with GPL code).
+//! If in doubt, check the FTDI [driver license terms].
+//!
+//! On Windows, we rely on MSVC and a manually set "LIBMSVC_PATH" environment
+//! variable.
+//! For example a possible 2019 Community installation path may be:
+//! ```text
+//! C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\lib\
+//! ```
+//! This brings in `legacy_stdio_definitions.lib` and `user32.lib`.
+//! It seems to play nicely with rust, but you may end up with multiple defined
+//! symbol errors if using this crate as a c/c++ dependency.
+//!
 //! # Supported Targets
 //!
 //! ## Tested Targets
 //!
-//! * `x86_64-pc-windows-msvc` (dynamic linking only)
-//! * `x86_64-unknown-linux-gnu` (static linking only)
-//! * `x86_64-unknown-linux-musl` (static linking only)
+//! * `i686-pc-windows-msvc` (dynamic + static)
+//! * `i686-unknown-linux-gnu` (dynamic + static)
+//! * `i686-unknown-linux-musl` (static)
+//! * `x86_64-pc-windows-msvc` (dynamic + static)
+//! * `x86_64-unknown-linux-gnu` (dynamic + static)
+//! * `x86_64-unknown-linux-musl` (static)
 //!
 //! ## Untested Targets
 //!
 //! These targets are provided, but they are untested.
 //! Use at your own risk.
 //!
-//! * `aarch64-unknown-linux-gnu` (static linking only)
-//! * `aarch64-unknown-linux-musl` (static linking only)
-//! * `arm-unknown-linux-gnueabihf` (static linking only)
-//! * `arm-unknown-linux-musleabihf` (static linking only)
-//! * `armv7-unknown-linux-gnueabihf` (static linking only)
-//! * `armv7-unknown-linux-musleabihf` (static linking only)
-//! * `i686-pc-windows-msvc` (dynamic linking only)
-//! * `i686-unknown-linux-gnu` (static linking only)
-//! * `i686-unknown-linux-musl` (static linking only)
+//! * `aarch64-unknown-linux-gnu` (dynamic + static)
+//! * `aarch64-unknown-linux-musl` (dynamic + static)
+//! * `arm-unknown-linux-gnueabihf` (dynamic + static)
+//! * `arm-unknown-linux-musleabihf` (dynamic + static)
+//! * `armv7-unknown-linux-gnueabihf` (dynamic + static)
+//! * `armv7-unknown-linux-musleabihf` (dynamic + static)
+//! * `i686-unknown-linux-musl` (dynamic)
+//! * `x86_64-unknown-linux-musl` (dynamic)
 //!
 //! # References
 //!
@@ -68,7 +94,7 @@
 //! These files can be found within the `vendor` directory.
 //!
 //! The code within the `vendor` directory is licensed by FTDI.
-//! Please see the [Driver License Terms] page for their license.
+//! Please see the [driver license terms] page for their license.
 //!
 //! All code outside of the `vendor` directory is MIT licensed.
 //!
@@ -79,13 +105,13 @@
 //! [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
 //! [bindgen]: https://github.com/rust-lang/rust-bindgen
 //! [D2XX Drivers Download Page]: https://www.ftdichip.com/Drivers/D2XX.htm
-//! [D2xx Programmers Guide V1.4]: https://www.ftdichip.com/Support/Documents/ProgramGuides/D2XX_Programmer's_Guide(FT_000071).pdf
-//! [Driver License Terms]: https://www.ftdichip.com/Drivers/FTDriverLicenceTerms.htm
+//! [D2xx Programmers Guide V1.4]: https://ftdichip.com/document/programming-guides/
+//! [driver license terms]: https://ftdichip.com/driver-licence-terms-details/
 //! [FTDI D2XX drivers]: https://www.ftdichip.com/Drivers/D2XX.htm
 //! [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
 //! [libftd2xx]: https://github.com/newAM/libftd2xx-rs
 //! [Rust Edition Guide]: https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html
-#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.6.0")]
+#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.7.0")]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]

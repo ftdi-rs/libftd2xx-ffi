@@ -18,7 +18,7 @@ The default feature set will use dynamic linking.
 
 ```toml
 [dependencies]
-libftd2xx-ffi = "~0.6.0"
+libftd2xx-ffi = "~0.7.0"
 ```
 
 ### Bindgen
@@ -29,7 +29,7 @@ The bindings can also be generated during compilation using the [bindgen]
 feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.6.0", features = ["bindgen"] }
+libftd2xx-ffi = { version = "~0.7.0", features = ["bindgen"] }
 ```
 
 Bindgen has additional dependencies that must be installed in order to
@@ -37,22 +37,25 @@ compile successfully, see the [bindgen requirements] page for more details.
 
 ### Static Linking
 Static linking the FTD2XX library into this crate can be done by using
-the ["static"] feature flag.
+the static feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.6.0", features = ["static"] }
+libftd2xx-ffi = { version = "~0.7.0", features = ["static"] }
 ```
-For GNU/Linux users, no further work is needed. Technically this may be preferred.
-However there may be license incompatibilities (static linking with GPL code).
-If in doubt, check the FTDI driver license terms.
+For GNU/Linux users, no further work is needed.
+Technically this may be preferred, however there may be license
+incompatibilities (static linking with GPL code).
+If in doubt, check the FTDI [driver license terms].
 
-On Windows, we rely on MSVC and a manually set the "LIBMSVC_PATH" environment variable.
+On Windows, we rely on MSVC and a manually set "LIBMSVC_PATH" environment
+variable.
 For example a possible 2019 Community installation path may be:
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\lib\
 ```
-This brings in legacy_stdio_definitions.lib and user32.lib. It seems to play nicely with rust,
-but you may end up with multiple defined symbol errors if using this crate as a c/c++ dependency.
+This brings in `legacy_stdio_definitions.lib` and `user32.lib`.
+It seems to play nicely with rust, but you may end up with multiple defined
+symbol errors if using this crate as a c/c++ dependency.
 
 ## Supported Targets
 
@@ -98,7 +101,7 @@ FTDI provides the D2XX driver as a compiled library and a header file.
 These files can be found within the `vendor` directory.
 
 The code within the `vendor` directory is licensed by FTDI.
-Please see the [Driver License Terms] page for their license.
+Please see the [driver license terms] page for their license.
 
 All code outside of the `vendor` directory is MIT licensed.
 
@@ -109,8 +112,8 @@ underlying library because it is closed source.
 [bindgen requirements]: https://rust-lang.github.io/rust-bindgen/requirements.html
 [bindgen]: https://github.com/rust-lang/rust-bindgen
 [D2XX Drivers Download Page]: https://www.ftdichip.com/Drivers/D2XX.htm
-[D2xx Programmers Guide V1.4]: https://www.ftdichip.com/Support/Documents/ProgramGuides/D2XX_Programmer's_Guide(FT_000071).pdf
-[Driver License Terms]: https://www.ftdichip.com/Drivers/FTDriverLicenceTerms.htm
+[D2xx Programmers Guide V1.4]: https://ftdichip.com/document/programming-guides/
+[driver license terms]: https://ftdichip.com/driver-licence-terms-details/
 [FTDI D2XX drivers]: https://www.ftdichip.com/Drivers/D2XX.htm
 [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
 [libftd2xx]: https://github.com/newAM/libftd2xx-rs
