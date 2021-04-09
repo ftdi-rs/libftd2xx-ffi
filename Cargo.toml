@@ -19,6 +19,14 @@ exclude = [
     "vendor/linux/**/libusb",
 ]
 
+[[bin]]
+name = "example_version"
+path = "examples/version.rs"
+
+[[bin]]
+name = "example_num_devices"
+path = "examples/num_devices.rs"
+
 [dependencies]
 cfg-if = "^1.0.0"
 
