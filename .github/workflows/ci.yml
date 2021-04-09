@@ -47,6 +47,7 @@ jobs:
         run: |
           RUSTFLAGS="-D warnings" cargo build --features=static --target ${{ matrix.target }}
           RUSTFLAGS="-D warnings" cargo build --features=static,bindgen --target ${{ matrix.target }}
+          RUSTFLAGS="-D warnings" cargo build --examples --features=static,bindgen --target ${{ matrix.target }}          
         if: ${{ contains(matrix.target, 'musl') }}
       - name: Build with glibc
         run: |
@@ -54,6 +55,7 @@ jobs:
           RUSTFLAGS="-D warnings" cargo build --features=bindgen  --target ${{ matrix.target }}
           RUSTFLAGS="-D warnings" cargo build --features=static  --target ${{ matrix.target }}
           RUSTFLAGS="-D warnings" cargo build --features=static,bindgen  --target ${{ matrix.target }}
+          RUSTFLAGS="-D warnings" cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}          
         if: ${{ contains(matrix.target, 'gnu') }}
       - run: cargo doc
 
