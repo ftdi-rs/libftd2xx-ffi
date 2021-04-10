@@ -134,9 +134,9 @@ fn main() {
     {
         let bindings = bindgen::Builder::default()
             .header(header.to_str().unwrap())
-            .whitelist_function("FT_.*")
-            .whitelist_type("FT_.*")
-            .whitelist_var("FT_.*")
+            .allowlist_function("FT_.*")
+            .allowlist_type("FT_.*")
+            .allowlist_var("FT_.*")
             .rustfmt_bindings(true)
             .derive_default(true)
             .parse_callbacks(Box::new(bindgen::CargoCallbacks))

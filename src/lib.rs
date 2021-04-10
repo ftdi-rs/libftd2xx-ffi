@@ -54,6 +54,8 @@
 //!
 //! ## Tested Targets
 //!
+//! * `aarch64-unknown-linux-gnu` (dynamic + static)
+//! * `aarch64-unknown-linux-musl` (static)
 //! * `i686-pc-windows-msvc` (dynamic + static)
 //! * `i686-unknown-linux-gnu` (dynamic + static)
 //! * `i686-unknown-linux-musl` (static)
@@ -66,14 +68,10 @@
 //! These targets are provided, but they are untested.
 //! Use at your own risk.
 //!
-//! * `aarch64-unknown-linux-gnu` (dynamic + static)
-//! * `aarch64-unknown-linux-musl` (dynamic + static)
 //! * `arm-unknown-linux-gnueabihf` (dynamic + static)
-//! * `arm-unknown-linux-musleabihf` (dynamic + static)
+//! * `arm-unknown-linux-musleabihf` (static)
 //! * `armv7-unknown-linux-gnueabihf` (dynamic + static)
-//! * `armv7-unknown-linux-musleabihf` (dynamic + static)
-//! * `i686-unknown-linux-musl` (dynamic)
-//! * `x86_64-unknown-linux-musl` (dynamic)
+//! * `armv7-unknown-linux-musleabihf` (static)
 //!
 //! # References
 //!
