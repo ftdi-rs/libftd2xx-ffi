@@ -38,7 +38,7 @@ jobs:
       - name: Install libc6-dev-arm64-cross
         run: sudo apt install libc6-dev-arm64-cross gcc-8-aarch64-linux-gnu gcc-aarch64-linux-gnu
         if: ${{ contains(matrix.target, 'aarch64') }}
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -68,7 +68,7 @@ jobs:
     env:
       RUSTFLAGS: "-D warnings"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -92,7 +92,7 @@ jobs:
       - name: Install target dependencies
         run: sudo apt install libc6-dev-i386
         if: ${{ contains(matrix.target, 'i686') }}
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -106,7 +106,7 @@ jobs:
       matrix:
         target: ["x86_64-pc-windows-msvc"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -117,7 +117,7 @@ jobs:
     name: Clippy
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -131,7 +131,7 @@ jobs:
     name: Rust Format
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -150,7 +150,7 @@ jobs:
       - windows_test
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
