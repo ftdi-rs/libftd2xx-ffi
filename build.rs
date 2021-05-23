@@ -42,6 +42,10 @@ fn search_path<'a>() -> &'a str {
             },
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
+        "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+            "x86_64" => "vendor/macos/x64/build",
+            target_arch => panic!("Target architecture not supported: {}", target_arch),
+        },        
         target_os => panic!("Target OS not supported: {}", target_os),
     }
 }
@@ -66,6 +70,12 @@ fn header_path<'a>() -> &'a str {
             },
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
+        //"macos" =>panic!("Header Test"),
+        "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str(){
+            "x86_64" => "vender/macos/x64/ftd2xx.h",
+            target_arch => panic!("Target architecture not supported: {}", target_arch),
+        },
+    
         target_os => panic!("Target OS not supported: {}", target_os),
     }
 }
@@ -109,7 +119,10 @@ fn linker_options() {
             println!("cargo:rustc-link-lib=static=legacy_stdio_definitions");
             println!("cargo:rustc-link-lib=user32");
         }
-        "linux" => {}
+        "linux" => {},
+
+        "macos" => {},
+
         target_os => panic!("Target OS not supported: {}", target_os),
     }
 }
