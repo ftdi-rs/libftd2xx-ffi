@@ -114,6 +114,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(clippy::too_many_arguments)]
+#![allow(clippy::upper_case_acronyms)]
 
 cfg_if::cfg_if! {
     if #[cfg(feature = "bindgen")] {
