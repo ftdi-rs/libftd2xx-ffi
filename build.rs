@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, path::PathBuf};
 
 fn search_path<'a>() -> &'a str {
     match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
@@ -124,7 +124,7 @@ fn linker_options() {
 }
 
 fn main() {
-    let cwd = env::current_dir().unwrap();
+    let cwd: PathBuf = file!().into();
     let mut header = cwd.clone();
     header.push(header_path());
     let mut search = cwd;
