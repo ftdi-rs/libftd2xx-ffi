@@ -124,7 +124,8 @@ fn linker_options() {
 }
 
 fn main() {
-    let cwd: PathBuf = file!().into();
+    let mut cwd: PathBuf = file!().into();
+    cwd.pop();
     let mut header = cwd.clone();
     header.push(header_path());
     let mut search = cwd;
