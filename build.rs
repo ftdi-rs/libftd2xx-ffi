@@ -43,7 +43,7 @@ fn search_path<'a>() -> &'a str {
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => "vendor/macos/x64/build",
+            "x86_64" => "vendor/macos/x64",
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         target_os => panic!("Target OS not supported: {}", target_os),
