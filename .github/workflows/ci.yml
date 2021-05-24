@@ -62,6 +62,21 @@ jobs:
           RUSTFLAGS="-D warnings" cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}          
         if: ${{ contains(matrix.target, 'gnu') }}
       - run: cargo doc
+  
+  macos_build:
+    name: Mac Build
+    runs-on: macos-11
+    env:
+      RUSTFLAGS: "-D warnings"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-apple-darwin
+      - run: cargo build --target x86_64-apple-darwin
+      - run: cargo build --features=bindgen --target x86_64-apple-darwin
+      - run: cargo doc
 
   windows_build:
     name: Windows Build
@@ -102,6 +117,18 @@ jobs:
           toolchain: stable
           target: ${{ matrix.target }}
       - run: cargo test --features=static --target ${{ matrix.target }}
+
+  macos_test:
+    name: Mac Unit Tests
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-apple-darwin
+      - run: cargo test --target x86_64-apple-darwin
+      - run: cargo doc
 
   windows_test:
     name: Windows Unit Tests
@@ -150,6 +177,8 @@ jobs:
       - format_check
       - linux_build
       - linux_test
+      - macos_build
+      - macos_test
       - windows_build
       - windows_test
     runs-on: ubuntu-20.04
