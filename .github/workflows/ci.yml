@@ -118,6 +118,17 @@ jobs:
           target: ${{ matrix.target }}
       - run: cargo test --features=static --target ${{ matrix.target }}
 
+  macos_test:
+    name: Mac Unit Tests
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-apple-darwin
+      - run: cargo test --target x86_64-apple-darwin
+
   windows_test:
     name: Windows Unit Tests
     runs-on: windows-latest
@@ -166,6 +177,7 @@ jobs:
       - linux_build
       - linux_test
       - macos_build
+      - macos_test
       - windows_build
       - windows_test
     runs-on: ubuntu-20.04

@@ -1,4 +1,4 @@
-use std::{env, path::PathBuf};
+use std::env;
 
 fn search_path<'a>() -> &'a str {
     match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
@@ -71,7 +71,7 @@ fn header_path<'a>() -> &'a str {
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => "vender/macos/ftd2xx.h",
+            "x86_64" => "vendor/macos/ftd2xx.h",
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         target_os => panic!("Target OS not supported: {}", target_os),
@@ -124,8 +124,7 @@ fn linker_options() {
 }
 
 fn main() {
-    let mut cwd: PathBuf = file!().into();
-    cwd.pop();
+    let cwd = env::current_dir().unwrap();
     let mut header = cwd.clone();
     header.push(header_path());
     let mut search = cwd;
