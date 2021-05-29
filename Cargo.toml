@@ -17,6 +17,7 @@ exclude = [
     "vendor/**/*.so.1.4.8",
     "vendor/**/examples",
     "vendor/linux/**/libusb",
+    "vendor/macos/**/libusb",
 ]
 
 [dependencies]
