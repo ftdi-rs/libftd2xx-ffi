@@ -10,7 +10,7 @@ readme = "README.md"
 build = "build.rs"
 repository = "https://github.com/newAM/libftd2xx-ffi-rs/"
 documentation = "https://docs.rs/libftd2xx-ffi"
-license = "MIT"
+license-file = "LICENSE"
 exclude = [
     "vendor/**/*.dll",
     "vendor/**/*.o",
