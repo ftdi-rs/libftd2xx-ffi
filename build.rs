@@ -42,6 +42,10 @@ fn search_path<'a>() -> &'a str {
             },
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
+        "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+            "x86_64" => "vendor/macos/build",
+            target_arch => panic!("Target architecture not supported: {}", target_arch),
+        },
         target_os => panic!("Target OS not supported: {}", target_os),
     }
 }
@@ -66,6 +70,10 @@ fn header_path<'a>() -> &'a str {
             },
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
+        "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+            "x86_64" => "vendor/macos/ftd2xx.h",
+            target_arch => panic!("Target architecture not supported: {}", target_arch),
+        },
         target_os => panic!("Target OS not supported: {}", target_os),
     }
 }
@@ -87,6 +95,14 @@ fn clang_args() -> &'static [&'static str] {
 #[cfg(not(feature = "static"))]
 fn linker_options() {
     println!("cargo:rustc-link-lib=dylib=ftd2xx");
+    match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
+        "macos" => {
+            println!("cargo:rustc-link-lib=framework=IOKit");
+            println!("cargo:rustc-link-lib=framework=CoreFoundation");
+        }
+        "linux" | "windows" => {}
+        target_os => panic!("Target OS not supported: {}", target_os),
+    }
 }
 
 #[cfg(feature = "static")]
@@ -110,6 +126,10 @@ fn linker_options() {
             println!("cargo:rustc-link-lib=user32");
         }
         "linux" => {}
+        "macos" => {
+            println!("cargo:rustc-link-lib=framework=IOKit");
+            println!("cargo:rustc-link-lib=framework=CoreFoundation");
+        }
         target_os => panic!("Target OS not supported: {}", target_os),
     }
 }
