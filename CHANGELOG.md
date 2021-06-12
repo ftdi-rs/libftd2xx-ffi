@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- Added support for `x86_64-apple-darwin`, dynamic linking only.
+
+### Changed
+- Changed the license for non-vendor material to dual MIT and 0BSD.
+- Updated the Linux library version from `1.4.22` to `1.4.24`.
+- Updated the Windows library version to `2.12.36.1`.
+
+### Removed
+- Removed support for 32-bit Linux targets, the vendor no longer supports these.
+
 ## [0.7.0] - 2021-03-25
 ### Added
 - Added the static feature flag to enable switching between static and dynamic

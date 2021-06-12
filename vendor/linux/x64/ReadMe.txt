@@ -24,7 +24,7 @@ libusb is included in this distribution.
 Installing the D2XX shared library and static library.
 ------------------------------------------------------
 
-1.  tar xfvz libftd2xx-x86_64-1.4.22.tgz
+1.  tar xfvz libftd2xx-x86_64-1.4.24.tgz
 
 This unpacks the archive, creating the following directory structure:
 
@@ -32,7 +32,7 @@ This unpacks the archive, creating the following directory structure:
         libftd2xx        (re-linkable objects)
         libusb           (re-linkable objects)
         libftd2xx.a      (static library)
-        libftd2xx.so.1.4.22   (dynamic library)
+        libftd2xx.so.1.4.24   (dynamic library)
         libftd2xx.txt    (platform-specific information)
     examples
     libusb               (source code)
@@ -52,13 +52,13 @@ already root, then step 3 (and step 7) is not necessary.
 
 Copies the libraries to a central location.
 
-5.  chmod 0755 /usr/local/lib/libftd2xx.so.1.4.22
+5.  chmod 0755 /usr/local/lib/libftd2xx.so.1.4.24
 
 Allows non-root access to the shared object.
 
-6.  ln -sf /usr/local/lib/libftd2xx.so.1.4.22 /usr/local/lib/libftd2xx.so
+6.  ln -sf /usr/local/lib/libftd2xx.so.1.4.24 /usr/local/lib/libftd2xx.so
 
-Creates a symbolic link to the 1.4.22 version of the shared object.
+Creates a symbolic link to the 1.4.24 version of the shared object.
 
 7.  cd ..
     cp ftd2xx.h  /usr/local/include

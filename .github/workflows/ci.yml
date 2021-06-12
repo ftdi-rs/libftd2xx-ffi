@@ -15,13 +15,14 @@ jobs:
   linux_build:
     name: Linux Build
     runs-on: ubuntu-20.04
+    env:
+      RUSTFLAGS: "-D warnings"
+      RUSTDOCFLAGS: "-D warnings"
     strategy:
       matrix:
         target:
           - "x86_64-unknown-linux-musl"
           - "x86_64-unknown-linux-gnu"
-          - "i686-unknown-linux-gnu"
-          - "i686-unknown-linux-musl"
           - "arm-unknown-linux-musleabihf"
           - "arm-unknown-linux-gnueabihf"
           - "armv7-unknown-linux-musleabihf"
@@ -33,9 +34,6 @@ jobs:
         run: sudo apt update
       - name: Install bindgen dependencies
         run: sudo apt install llvm-dev libclang-dev clang
-      - name: Install libc6-dev-i386
-        run: sudo apt install libc6-dev-i386
-        if: ${{ contains(matrix.target, 'i686') }}
       - name: Install libc6-dev-armhf-cross
         run: sudo apt install libc6-dev-armhf-cross gcc-8-arm-linux-gnueabihf gcc-arm-linux-gnueabihf
         if: ${{ contains(matrix.target, 'arm') }}
@@ -49,17 +47,17 @@ jobs:
           target: ${{ matrix.target }}
       - name: Build with musl
         run: |
-          RUSTFLAGS="-D warnings" cargo build --features=static --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=static,bindgen --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --examples --features=static,bindgen --target ${{ matrix.target }}          
+          cargo build --features=static --target ${{ matrix.target }}
+          cargo build --features=static,bindgen --target ${{ matrix.target }}
+          cargo build --examples --features=static,bindgen --target ${{ matrix.target }}
         if: ${{ contains(matrix.target, 'musl') }}
       - name: Build with glibc
         run: |
-          RUSTFLAGS="-D warnings" cargo build --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=bindgen  --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=static  --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=static,bindgen  --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}          
+          cargo build --target ${{ matrix.target }}
+          cargo build --features=bindgen  --target ${{ matrix.target }}
+          cargo build --features=static  --target ${{ matrix.target }}
+          cargo build --features=static,bindgen  --target ${{ matrix.target }}
+          cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}
         if: ${{ contains(matrix.target, 'gnu') }}
       - run: cargo doc
 
@@ -68,6 +66,7 @@ jobs:
     runs-on: macos-10.15
     env:
       RUSTFLAGS: "-D warnings"
+      RUSTDOCFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -75,10 +74,7 @@ jobs:
           toolchain: stable
           target: x86_64-apple-darwin
       - run: cargo build --target x86_64-apple-darwin
-      # I have no idea why static does not work
-      # - run: cargo build --features=static --target x86_64-apple-darwin
       - run: cargo build --features=bindgen --target x86_64-apple-darwin
-      # - run: cargo build --features=static,bindgen --target x86_64-apple-darwin
       - run: cargo doc
 
   windows_build:
@@ -89,6 +85,7 @@ jobs:
         target: ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
     env:
       RUSTFLAGS: "-D warnings"
+      RUSTDOCFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -106,14 +103,9 @@ jobs:
         target:
           - "x86_64-unknown-linux-musl"
           - "x86_64-unknown-linux-gnu"
-          - "i686-unknown-linux-gnu"
-          - "i686-unknown-linux-musl"
     steps:
       - name: Update sources
         run: sudo apt update
-      - name: Install target dependencies
-        run: sudo apt install libc6-dev-i386
-        if: ${{ contains(matrix.target, 'i686') }}
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
