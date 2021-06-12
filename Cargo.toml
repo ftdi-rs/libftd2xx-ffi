@@ -30,6 +30,3 @@ version-sync = "~0.9.2"
 
 [features]
 static = []
-
-[badges]
-maintenance = { status = "passively-maintained" }
