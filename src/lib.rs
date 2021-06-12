@@ -1,5 +1,5 @@
 //! Rust FFI bindings to the [FTDI D2XX drivers](https://www.ftdichip.com/Drivers/D2XX.htm).
-#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.7.0")]
+#![doc(html_root_url = "https://docs.rs/libftd2xx-ffi/0.8.0")]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]

@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.8.0] - 2021-06-12
 ### Added
 - Added support for `x86_64-apple-darwin`, dynamic linking only.
 
@@ -51,7 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed `build.rs` script to handle cross compilation.
 
-[Unreleased]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.7.0...HEAD
+[Unreleased]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.8.0...HEAD
+[0.8.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.7.0...0.8.0
 [0.7.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.6.0...0.7.0
 [0.6.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.1...0.6.0
 [0.5.1]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.0...0.5.1
