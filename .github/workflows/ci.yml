@@ -15,6 +15,9 @@ jobs:
   linux_build:
     name: Linux Build
     runs-on: ubuntu-20.04
+    env:
+      RUSTFLAGS: "-D warnings"
+      RUSTDOCFLAGS: "-D warnings"
     strategy:
       matrix:
         target:
@@ -44,17 +47,17 @@ jobs:
           target: ${{ matrix.target }}
       - name: Build with musl
         run: |
-          RUSTFLAGS="-D warnings" cargo build --features=static --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=static,bindgen --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --examples --features=static,bindgen --target ${{ matrix.target }}          
+          cargo build --features=static --target ${{ matrix.target }}
+          cargo build --features=static,bindgen --target ${{ matrix.target }}
+          cargo build --examples --features=static,bindgen --target ${{ matrix.target }}
         if: ${{ contains(matrix.target, 'musl') }}
       - name: Build with glibc
         run: |
-          RUSTFLAGS="-D warnings" cargo build --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=bindgen  --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=static  --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --features=static,bindgen  --target ${{ matrix.target }}
-          RUSTFLAGS="-D warnings" cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}          
+          cargo build --target ${{ matrix.target }}
+          cargo build --features=bindgen  --target ${{ matrix.target }}
+          cargo build --features=static  --target ${{ matrix.target }}
+          cargo build --features=static,bindgen  --target ${{ matrix.target }}
+          cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}
         if: ${{ contains(matrix.target, 'gnu') }}
       - run: cargo doc
 
@@ -63,6 +66,7 @@ jobs:
     runs-on: macos-10.15
     env:
       RUSTFLAGS: "-D warnings"
+      RUSTDOCFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -70,11 +74,7 @@ jobs:
           toolchain: stable
           target: x86_64-apple-darwin
       - run: cargo build --target x86_64-apple-darwin
-      # I have no idea why static does not work
-      # Probably: https://github.com/rust-lang/rust/issues/50220
-      # - run: cargo build --features=static --target x86_64-apple-darwin
       - run: cargo build --features=bindgen --target x86_64-apple-darwin
-      # - run: cargo build --features=static,bindgen --target x86_64-apple-darwin
       - run: cargo doc
 
   windows_build:
@@ -85,6 +85,7 @@ jobs:
         target: ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
     env:
       RUSTFLAGS: "-D warnings"
+      RUSTDOCFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
