@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for `x86_64-apple-darwin`, dynamic linking only.
 
 ### Changed
+- Changed the license for non-vendor material to dual MIT and 0BSD.
 - Updated the Linux library version from `1.4.22` to `1.4.24`.
 - Updated the Windows library version to `2.12.36.1`.
 
