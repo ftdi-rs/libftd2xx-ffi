@@ -58,6 +58,7 @@ int main()
 		pcBufLD[i] = cBufLD[i];
 	}
 	pcBufLD[MAX_DEVICES] = NULL;
+    memset(cBufLD, 0, sizeof(cBufLD));
 	
 	ftStatus = FT_ListDevices(pcBufLD, &iNumDevs, FT_LIST_ALL | FT_OPEN_BY_SERIAL_NUMBER);
 	
@@ -82,7 +83,7 @@ int main()
 		 		use lsmod to check this and rmmod ftdi_sio to remove
 				also rmmod usbserial
 		 	*/
-			printf("Error FT_OpenEx(%d), device %d\n", (int)ftStatus, i);
+			printf("Error FT_OpenEx(%d), device %d serial number \"%s\"\n", (int)ftStatus, i, cBufLD[i]);
 			printf("Use lsmod to check if ftdi_sio (and usbserial) are present.\n");
 			printf("If so, unload them using rmmod, as they conflict with ftd2xx.\n");
 			return 1;

@@ -19,8 +19,7 @@ STATIC_APP = $(APP)-static
 DYNAMIC_APP = $(APP)-dynamic
 
 all: $(APP)-static $(APP)-dynamic 
-
-$(STATIC_APP): main.c	
+$(STATIC_APP): main.c
 	$(CC) main.c -o $(STATIC_APP) ../../build/libftd2xx.a $(CFLAGS) $(DEPENDENCIES)
 
 $(DYNAMIC_APP): main.c	
