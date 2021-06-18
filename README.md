@@ -64,6 +64,8 @@ symbol errors if using this crate as a c/c++ dependency.
 * `aarch64-unknown-linux-gnu` (dynamic + static)
 * `aarch64-unknown-linux-musl` (static)
 * `i686-pc-windows-msvc` (dynamic + static)
+* `i686-unknown-linux-gnu` (dynamic + static)
+* `i686-unknown-linux-musl` (static)
 * `x86_64-pc-windows-msvc` (dynamic + static)
 * `x86_64-unknown-linux-gnu` (dynamic + static)
 * `x86_64-unknown-linux-musl` (static)
