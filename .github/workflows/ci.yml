@@ -97,7 +97,10 @@ jobs:
         with:
           toolchain: stable
           target: ${{ matrix.target }}
-      - run: cargo build --target ${{ matrix.target }}
+      - run: |
+          cargo build --target ${{ matrix.target }}
+          cargo build --features=static  --target ${{ matrix.target }}
+          cargo build --examples --features=static  --target ${{ matrix.target }}
       - run: cargo doc
 
   linux_test:
