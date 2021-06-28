@@ -110,21 +110,7 @@ fn linker_options() {
     println!("cargo:rustc-link-lib=static=ftd2xx");
 
     match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
-        "windows" => {
-            let libmsvc_path = if let Some(libmsvc_path) = env::var_os("LIBMSVC_PATH") {
-                match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-                    "x86_64" => format!("{}{}", libmsvc_path.into_string().unwrap(), "\\x64"),
-                    "x86" => format!("{}{}", libmsvc_path.into_string().unwrap(), "\\x64"),
-                    target_arch => panic!("Target architecture not supported: {}", target_arch),
-                }
-            } else {
-                panic!("LIBMSVC_PATH environment variable not found.");
-            };
-
-            println!("cargo:rustc-link-search=native={}", libmsvc_path);
-            println!("cargo:rustc-link-lib=static=legacy_stdio_definitions");
-            println!("cargo:rustc-link-lib=user32");
-        }
+        "windows" => {}
         "linux" => {}
         "macos" => {
             println!("cargo:rustc-link-lib=framework=IOKit");
