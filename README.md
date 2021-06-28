@@ -18,7 +18,7 @@ The default feature set will use dynamic linking.
 
 ```toml
 [dependencies]
-libftd2xx-ffi = "~0.8.1"
+libftd2xx-ffi = "~0.8.2"
 ```
 
 ### Bindgen
@@ -29,7 +29,7 @@ The bindings can also be generated during compilation using the [bindgen]
 feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.8.1", features = ["bindgen"] }
+libftd2xx-ffi = { version = "~0.8.2", features = ["bindgen"] }
 ```
 
 Bindgen has additional dependencies that must be installed in order to
@@ -40,7 +40,7 @@ Static linking the FTD2XX library into this crate can be done by using
 the static feature flag.
 ```toml
 [dependencies]
-libftd2xx-ffi = { version = "~0.8.1", features = ["static"] }
+libftd2xx-ffi = { version = "~0.8.2", features = ["static"] }
 ```
 For GNU/Linux users, no further work is needed.
 Technically this may be preferred, however there may be license
