@@ -43,7 +43,7 @@ fn search_path<'a>() -> &'a str {
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => "vendor/macos/build",
+            "x86_64" | "aarch64" => "vendor/macos/build",
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         target_os => panic!("Target OS not supported: {}", target_os),
@@ -71,7 +71,7 @@ fn header_path<'a>() -> &'a str {
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => "vendor/macos/ftd2xx.h",
+            "x86_64" | "aarch64" => "vendor/macos/ftd2xx.h",
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         target_os => panic!("Target OS not supported: {}", target_os),
