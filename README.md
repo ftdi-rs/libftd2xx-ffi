@@ -69,6 +69,7 @@ Use at your own risk.
 * `armv7-unknown-linux-gnueabihf` (dynamic + static)
 * `armv7-unknown-linux-musleabihf` (static)
 * `x86_64-apple-darwin` (dynamic)
+* `aarch64-apple-darwin` (dynamic)
 
 ## References
 
