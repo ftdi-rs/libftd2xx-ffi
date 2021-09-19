@@ -71,15 +71,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed `build.rs` script to handle cross compilation.
 
-[Unreleased]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.8.4...HEAD
-[0.8.4]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.8.3...0.8.4
-[0.8.3]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.8.2...0.8.3
-[0.8.2]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.8.1...0.8.2
-[0.8.1]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.8.0...0.8.1
-[0.8.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.7.0...0.8.0
-[0.7.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.6.0...0.7.0
-[0.6.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.1...0.6.0
-[0.5.1]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.5.0...0.5.1
-[0.5.0]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.4.1...0.5.0
-[0.4.1]: https://github.com/newAM/libftd2xx-ffi-rs/compare/0.4.0...0.4.1
+[Unreleased]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.8.4...HEAD
+[0.8.4]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.8.3...0.8.4
+[0.8.3]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.8.2...0.8.3
+[0.8.2]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.8.1...0.8.2
+[0.8.1]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.8.0...0.8.1
+[0.8.0]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.7.0...0.8.0
+[0.7.0]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.6.0...0.7.0
+[0.6.0]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.5.1...0.6.0
+[0.5.1]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.5.0...0.5.1
+[0.5.0]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.4.1...0.5.0
+[0.4.1]: https://github.com/ftdi-rs/libftd2xx-ffi/compare/0.4.0...0.4.1
 [resolver version]: https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions
