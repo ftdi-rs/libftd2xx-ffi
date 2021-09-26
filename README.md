@@ -105,5 +105,5 @@ underlying library because it is closed source.
 [driver license terms]: https://ftdichip.com/driver-licence-terms-details/
 [FTDI D2XX drivers]: https://www.ftdichip.com/Drivers/D2XX.htm
 [FTDI Drivers Installation Guide for Linux]: http://www.ftdichip.cn/Support/Documents/AppNotes/AN_220_FTDI_Drivers_Installation_Guide_for_Linux.pdf
-[libftd2xx]: https://github.com/newAM/libftd2xx-rs
+[libftd2xx]: https://github.com/ftdi-rs/libftd2xx
 [Rust Edition Guide]: https://doc.rust-lang.org/edition-guide/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html
