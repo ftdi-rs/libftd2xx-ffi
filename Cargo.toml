@@ -11,6 +11,7 @@ build = "build.rs"
 repository = "https://github.com/ftdi-rs/libftd2xx-ffi"
 documentation = "https://docs.rs/libftd2xx-ffi"
 license-file = "LICENSE"
+links = "ftd2xx"
 exclude = [
     "vendor/**/*.dll",
     "vendor/**/*.o",
