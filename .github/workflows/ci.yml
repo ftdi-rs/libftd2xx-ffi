@@ -14,7 +14,7 @@ jobs:
 
   linux_build:
     name: Linux Build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       RUSTFLAGS: "-D warnings"
       RUSTDOCFLAGS: "-D warnings"
@@ -40,16 +40,15 @@ jobs:
         run: sudo apt install libc6-dev-i386
         if: ${{ contains(matrix.target, 'i686') }}
       - name: Install libc6-dev-armhf-cross
-        run: sudo apt install libc6-dev-armhf-cross gcc-8-arm-linux-gnueabihf gcc-arm-linux-gnueabihf
+        run: sudo apt install libc6-dev-armhf-cross gcc-arm-linux-gnueabihf
         if: ${{ contains(matrix.target, 'arm') }}
       - name: Install libc6-dev-arm64-cross
-        run: sudo apt install libc6-dev-arm64-cross gcc-8-aarch64-linux-gnu gcc-aarch64-linux-gnu
+        run: sudo apt install libc6-dev-arm64-cross gcc-aarch64-linux-gnu
         if: ${{ contains(matrix.target, 'aarch64') }}
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          target: ${{ matrix.target }}
+          targets: ${{ matrix.target }}
       - name: Build with musl
         run: |
           cargo build --features=static --target ${{ matrix.target }}
@@ -68,16 +67,13 @@ jobs:
 
   macos_build:
     name: Mac Build
-    runs-on: macos-10.15
+    runs-on: macos-12
     env:
       RUSTFLAGS: "-D warnings"
       RUSTDOCFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: x86_64-apple-darwin
+      - uses: dtolnay/rust-toolchain@stable
       - run: cargo build --target x86_64-apple-darwin
       - run: cargo build --features=bindgen --target x86_64-apple-darwin
       - run: cargo doc
@@ -93,10 +89,9 @@ jobs:
       RUSTDOCFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          target: ${{ matrix.target }}
+          targets: ${{ matrix.target }}
       - run: |
           cargo build --target ${{ matrix.target }}
           cargo build --features=static  --target ${{ matrix.target }}
@@ -105,7 +100,7 @@ jobs:
 
   linux_test:
     name: Linux Unit Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         target:
@@ -115,21 +110,17 @@ jobs:
       - name: Update sources
         run: sudo apt update
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          target: ${{ matrix.target }}
+          targets: ${{ matrix.target }}
       - run: cargo test --features=static --target ${{ matrix.target }}
 
   macos_test:
     name: Mac Unit Tests
-    runs-on: macos-10.15
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: x86_64-apple-darwin
+      - uses: dtolnay/rust-toolchain@stable
       - run: cargo test --target x86_64-apple-darwin
 
   windows_test:
@@ -140,36 +131,30 @@ jobs:
         target: ["x86_64-pc-windows-msvc"]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          target: ${{ matrix.target }}
+          targets: ${{ matrix.target }}
       - run: cargo test --target ${{ matrix.target }}
 
   clippy_check:
     name: Clippy
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
           components: clippy
-      - uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features
+      - run: cargo clippy --all-features -- --deny warnings
 
   format_check:
     name: Rust Format
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: stable
           components: rustfmt
-      - run: cargo fmt -- --check
+      - run: cargo +nightly fmt -- --check
 
   release:
     name: crates.io release
@@ -183,12 +168,10 @@ jobs:
       - macos_test
       - windows_build
       - windows_test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+      - uses: dtolnay/rust-toolchain@stable
       - run: cargo publish --token ${CRATES_IO_TOKEN}
         env:
           CRATES_IO_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
