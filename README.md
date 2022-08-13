@@ -1,4 +1,3 @@
-![Maintenance](https://img.shields.io/badge/maintenance-passively--maintained-yellowgreen.svg)
 [![crates.io](https://img.shields.io/crates/v/libftd2xx-ffi.svg)](https://crates.io/crates/libftd2xx-ffi)
 [![docs.rs](https://docs.rs/libftd2xx-ffi/badge.svg)](https://docs.rs/libftd2xx-ffi/)
 [![CI](https://github.com/ftdi-rs/libftd2xx-ffi/workflows/CI/badge.svg)](https://github.com/ftdi-rs/libftd2xx-ffi/actions)
