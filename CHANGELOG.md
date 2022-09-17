@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added the `links` manifest key.
 
+### Fixed
+- Fixed path segment separators when cross-compiling for Windows from Linux.
+
 ## [0.8.4] - 2021-08-14
 ### Added
 - Added pre-generated bindings for `x86_64-apple-darwin`.
