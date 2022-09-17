@@ -1,81 +1,102 @@
-use std::env;
+use std::{env, path::PathBuf};
 
-fn search_path<'a>() -> &'a str {
+fn search_path() -> PathBuf {
+    // PathBuf is used so that the path segment separators match the host system
+    // This is important for cross-compiling for Windows from Linux
+    let mut path: PathBuf = PathBuf::from("vendor");
+
     match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
-        "windows" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => {
-                #[cfg(not(feature = "static"))]
-                {
-                    "vendor\\windows\\amd64"
+        "windows" => {
+            path.push("windows");
+            match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+                "x86_64" => {
+                    #[cfg(feature = "static")]
+                    {
+                        path.push("Static");
+                    }
+                    path.push("amd64");
                 }
-                #[cfg(feature = "static")]
-                {
-                    "vendor\\windows\\Static\\amd64"
+                "x86" => {
+                    #[cfg(feature = "static")]
+                    {
+                        path.push("Static");
+                    }
+                    path.push("i386");
                 }
+                target_arch => panic!("Target architecture not supported: {}", target_arch),
             }
-            "x86" => {
-                #[cfg(not(feature = "static"))]
-                {
-                    "vendor\\windows\\i386"
-                }
-                #[cfg(feature = "static")]
-                {
-                    "vendor\\windows\\Static\\i386"
-                }
+        }
+        "linux" => {
+            path.push("linux");
+            match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+                "x86_64" => path.push("x64"),
+                "x86" => path.push("x86"),
+                "arm" | "aarch64" => match env::var("TARGET").unwrap().as_str() {
+                    "arm-unknown-linux-musleabihf" | "arm-unknown-linux-gnueabihf" => {
+                        path.push("armv6-hf");
+                    }
+                    "armv7-unknown-linux-musleabihf" | "armv7-unknown-linux-gnueabihf" => {
+                        path.push("armv7-hf");
+                    }
+                    "aarch64-unknown-linux-musl" | "aarch64-unknown-linux-gnu" => {
+                        path.push("armv8-hf");
+                    }
+                    target => panic!("Target not supported: {}", target),
+                },
+                target_arch => panic!("Target architecture not supported: {}", target_arch),
             }
-            target_arch => panic!("Target architecture not supported: {}", target_arch),
-        },
-        "linux" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => "vendor/linux/x64/build",
-            "x86" => "vendor/linux/x86/build",
-            "arm" | "aarch64" => match env::var("TARGET").unwrap().as_str() {
-                "arm-unknown-linux-musleabihf" | "arm-unknown-linux-gnueabihf" => {
-                    "vendor/linux/armv6-hf/build"
-                }
-                "armv7-unknown-linux-musleabihf" | "armv7-unknown-linux-gnueabihf" => {
-                    "vendor/linux/armv7-hf/build"
-                }
-                "aarch64-unknown-linux-musl" | "aarch64-unknown-linux-gnu" => {
-                    "vendor/linux/armv8-hf/build"
-                }
-                target => panic!("Target not supported: {}", target),
-            },
-            target_arch => panic!("Target architecture not supported: {}", target_arch),
-        },
+            path.push("build");
+        }
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" | "aarch64" => "vendor/macos/build",
+            "x86_64" | "aarch64" => {
+                path.push("macos");
+                path.push("build");
+            }
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         target_os => panic!("Target OS not supported: {}", target_os),
     }
+
+    path
 }
 
-fn header_path<'a>() -> &'a str {
+fn header_path() -> PathBuf {
+    // PathBuf is used so that the path segment separators match the host system
+    // This is important for cross-compiling for Windows from Linux
+    let mut path: PathBuf = PathBuf::from("vendor");
+
     match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
-        "windows" => "vendor/windows/ftd2xx.h",
-        "linux" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" => "vendor/linux/x64/ftd2xx.h",
-            "x86" => "vendor/linux/x86/ftd2xx.h",
-            "arm" | "aarch64" => match env::var("TARGET").unwrap().as_str() {
-                "arm-unknown-linux-musleabihf" | "arm-unknown-linux-gnueabihf" => {
-                    "vendor/linux/armv6-hf/ftd2xx.h"
-                }
-                "armv7-unknown-linux-musleabihf" | "armv7-unknown-linux-gnueabihf" => {
-                    "vendor/linux/armv7-hf/ftd2xx.h"
-                }
-                "aarch64-unknown-linux-musl" | "aarch64-unknown-linux-gnu" => {
-                    "vendor/linux/armv8-hf/ftd2xx.h"
-                }
-                target => panic!("Target not supported: {}", target),
-            },
-            target_arch => panic!("Target architecture not supported: {}", target_arch),
-        },
+        "windows" => path.push("windows"),
+        "linux" => {
+            path.push("linux");
+            match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+                "x86_64" => path.push("x64"),
+                "x86" => path.push("x86"),
+                "arm" | "aarch64" => match env::var("TARGET").unwrap().as_str() {
+                    "arm-unknown-linux-musleabihf" | "arm-unknown-linux-gnueabihf" => {
+                        path.push("armv6-hf")
+                    }
+                    "armv7-unknown-linux-musleabihf" | "armv7-unknown-linux-gnueabihf" => {
+                        path.push("armv7-hf")
+                    }
+                    "aarch64-unknown-linux-musl" | "aarch64-unknown-linux-gnu" => {
+                        path.push("armv8-hf")
+                    }
+                    target => panic!("Target not supported: {}", target),
+                },
+                target_arch => panic!("Target architecture not supported: {}", target_arch),
+            }
+        }
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" | "aarch64" => "vendor/macos/ftd2xx.h",
+            "x86_64" | "aarch64" => path.push("macos"),
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
         target_os => panic!("Target OS not supported: {}", target_os),
     }
+
+    path.push("ftd2xx.h");
+
+    path
 }
 
 // This adds sysroot to bindgen if cross-compiling.
@@ -121,10 +142,10 @@ fn linker_options() {
 }
 
 fn main() {
-    let cwd = env::current_dir().unwrap();
-    let mut header = cwd.clone();
+    let cwd: PathBuf = env::current_dir().unwrap();
+    let mut header: PathBuf = cwd.clone();
     header.push(header_path());
-    let mut search = cwd;
+    let mut search: PathBuf = cwd;
     search.push(search_path());
 
     println!(
