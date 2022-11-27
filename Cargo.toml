@@ -1,6 +1,6 @@
 [package]
 name = "libftd2xx-ffi"
-version = "0.8.5"
+version = "0.8.6"
 description = "Rust FFI bindings to the FTDI D2XX drivers."
 keywords = ["ftdi", "ffi", "usb"]
 categories = ["external-ffi-bindings"]
