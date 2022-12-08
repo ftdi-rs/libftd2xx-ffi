@@ -48,9 +48,15 @@ fn search_path() -> PathBuf {
             path.push("build");
         }
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-            "x86_64" | "aarch64" => {
+            "x86_64" => {
                 path.push("macos");
                 path.push("build");
+                path.push("x86_64");
+            }
+            "aarch64" => {
+                path.push("macos");
+                path.push("build");
+                path.push("arm64");
             }
             target_arch => panic!("Target architecture not supported: {}", target_arch),
         },
