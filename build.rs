@@ -23,7 +23,7 @@ fn search_path() -> PathBuf {
                     }
                     path.push("i386");
                 }
-                target_arch => panic!("Target architecture not supported: {}", target_arch),
+                target_arch => panic!("Target architecture not supported: {target_arch}"),
             }
         }
         "linux" => {
@@ -41,9 +41,9 @@ fn search_path() -> PathBuf {
                     "aarch64-unknown-linux-musl" | "aarch64-unknown-linux-gnu" => {
                         path.push("armv8-hf");
                     }
-                    target => panic!("Target not supported: {}", target),
+                    target => panic!("Target not supported: {target}"),
                 },
-                target_arch => panic!("Target architecture not supported: {}", target_arch),
+                target_arch => panic!("Target architecture not supported: {target_arch}"),
             }
             path.push("build");
         }
@@ -52,9 +52,9 @@ fn search_path() -> PathBuf {
                 path.push("macos");
                 path.push("build");
             }
-            target_arch => panic!("Target architecture not supported: {}", target_arch),
+            target_arch => panic!("Target architecture not supported: {target_arch}"),
         },
-        target_os => panic!("Target OS not supported: {}", target_os),
+        target_os => panic!("Target OS not supported: {target_os}"),
     }
 
     path
@@ -82,16 +82,16 @@ fn header_path() -> PathBuf {
                     "aarch64-unknown-linux-musl" | "aarch64-unknown-linux-gnu" => {
                         path.push("armv8-hf")
                     }
-                    target => panic!("Target not supported: {}", target),
+                    target => panic!("Target not supported: {target}"),
                 },
-                target_arch => panic!("Target architecture not supported: {}", target_arch),
+                target_arch => panic!("Target architecture not supported: {target_arch}"),
             }
         }
         "macos" => match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
             "x86_64" | "aarch64" => path.push("macos"),
-            target_arch => panic!("Target architecture not supported: {}", target_arch),
+            target_arch => panic!("Target architecture not supported: {target_arch}"),
         },
-        target_os => panic!("Target OS not supported: {}", target_os),
+        target_os => panic!("Target OS not supported: {target_os}"),
     }
 
     path.push("ftd2xx.h");
@@ -122,7 +122,7 @@ fn linker_options() {
             println!("cargo:rustc-link-lib=framework=CoreFoundation");
         }
         "linux" | "windows" => {}
-        target_os => panic!("Target OS not supported: {}", target_os),
+        target_os => panic!("Target OS not supported: {target_os}"),
     }
 }
 
@@ -137,7 +137,7 @@ fn linker_options() {
             println!("cargo:rustc-link-lib=framework=IOKit");
             println!("cargo:rustc-link-lib=framework=CoreFoundation");
         }
-        target_os => panic!("Target OS not supported: {}", target_os),
+        target_os => panic!("Target OS not supported: {target_os}"),
     }
 }
 

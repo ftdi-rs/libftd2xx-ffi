@@ -10,6 +10,6 @@ fn main() {
             FT_LIST_NUMBER_ONLY,
         )
     };
-    println!("Status: {}", status);
-    println!("Number of devices: {}", num_devs);
+    println!("Status: {status}");
+    println!("Number of devices: {num_devs}");
 }
