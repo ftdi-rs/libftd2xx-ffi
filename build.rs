@@ -164,7 +164,7 @@ fn main() {
             .allowlist_function("FT_.*")
             .allowlist_type("FT_.*")
             .allowlist_var("FT_.*")
-            .rustfmt_bindings(true)
+            .formatter(bindgen::Formatter::Rustfmt)
             .derive_default(true)
             .parse_callbacks(Box::new(bindgen::CargoCallbacks))
             .clang_args(clang_args())
