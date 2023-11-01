@@ -166,7 +166,7 @@ fn main() {
             .allowlist_var("FT_.*")
             .formatter(bindgen::Formatter::Rustfmt)
             .derive_default(true)
-            .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+            .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
             .clang_args(clang_args())
             .generate()
             .expect("Unable to generate bindings");
