@@ -20,6 +20,14 @@ exclude = [
     "vendor/linux/**/libusb",
 ]
 
+[lints.rust]
+rust_2018_idioms = { level = "warn", priority = -1 }
+future-incompatible = "warn"
+
+[lints.clippy]
+nursery = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+
 [dependencies]
 cfg-if = "^1.0.0"
 
