@@ -1,10 +1,6 @@
 //! Rust FFI bindings to the [FTDI D2XX drivers](https://www.ftdichip.com/Drivers/D2XX.htm).
-#![allow(non_upper_case_globals)]
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-#![allow(clippy::too_many_arguments)]
-#![allow(clippy::upper_case_acronyms)]
-#![allow(clippy::useless_transmute)]
+#![allow(non_camel_case_types, non_snake_case, non_upper_case_globals)]
+#![allow(clippy::all, clippy::pedantic, clippy::nursery)]
 
 cfg_if::cfg_if! {
     if #[cfg(feature = "bindgen")] {

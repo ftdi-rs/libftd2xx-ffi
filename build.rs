@@ -74,13 +74,13 @@ fn header_path() -> PathBuf {
                 "x86" => path.push("x86"),
                 "arm" | "aarch64" => match env::var("TARGET").unwrap().as_str() {
                     "arm-unknown-linux-musleabihf" | "arm-unknown-linux-gnueabihf" => {
-                        path.push("armv6-hf")
+                        path.push("armv6-hf");
                     }
                     "armv7-unknown-linux-musleabihf" | "armv7-unknown-linux-gnueabihf" => {
-                        path.push("armv7-hf")
+                        path.push("armv7-hf");
                     }
                     "aarch64-unknown-linux-musl" | "aarch64-unknown-linux-gnu" => {
-                        path.push("armv8-hf")
+                        path.push("armv8-hf");
                     }
                     target => panic!("Target not supported: {target}"),
                 },
@@ -131,8 +131,7 @@ fn linker_options() {
     println!("cargo:rustc-link-lib=static=ftd2xx");
 
     match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
-        "windows" => {}
-        "linux" => {}
+        "windows" | "linux" => {}
         "macos" => {
             println!("cargo:rustc-link-lib=framework=IOKit");
             println!("cargo:rustc-link-lib=framework=CoreFoundation");
