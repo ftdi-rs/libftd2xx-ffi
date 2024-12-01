@@ -13,6 +13,8 @@ cfg_if::cfg_if! {
         include!("bindings_windows_x64.rs");
     } else if #[cfg(all(target_os = "windows", target_arch = "x86"))] {
         include!("bindings_windows_x86.rs");
+    } else if #[cfg(all(target_os = "windows", target_arch = "aarch64"))] {
+        include!("bindings_windows_arm64.rs");
     } else if #[cfg(all(target_os = "linux", target_arch = "arm"))] {
         include!("bindings_linux_armv6.rs");
     } else if #[cfg(all(target_os = "linux", target_arch = "aarch64"))] {

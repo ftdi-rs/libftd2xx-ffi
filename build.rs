@@ -23,6 +23,9 @@ fn search_path() -> PathBuf {
                     }
                     path.push("i386");
                 }
+                "aarch64" => {
+                    path.push("arm64");
+                }
                 target_arch => panic!("Target architecture not supported: {target_arch}"),
             }
         }
