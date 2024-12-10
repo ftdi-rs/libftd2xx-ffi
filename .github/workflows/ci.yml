@@ -12,7 +12,7 @@ name: CI
 jobs:
   linux_build:
     name: Linux Build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       RUSTFLAGS: "-D warnings"
       RUSTDOCFLAGS: "-D warnings"
@@ -65,13 +65,15 @@ jobs:
 
   macos_build:
     name: Mac Build
-    runs-on: macos-12
+    runs-on: macos-13
     env:
       RUSTFLAGS: "-D warnings"
       RUSTDOCFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-apple-darwin
       - run: cargo build --target x86_64-apple-darwin
       - run: cargo build --features=bindgen --target x86_64-apple-darwin
       - run: cargo doc
@@ -98,7 +100,7 @@ jobs:
 
   linux_test:
     name: Linux Unit Tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         target:
@@ -115,10 +117,12 @@ jobs:
 
   macos_test:
     name: Mac Unit Tests
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-apple-darwin
       - run: cargo test --target x86_64-apple-darwin
 
   windows_test:
@@ -136,7 +140,7 @@ jobs:
 
   clippy_check:
     name: Clippy
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -146,7 +150,7 @@ jobs:
 
   format_check:
     name: Rust Format
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@nightly
@@ -166,7 +170,7 @@ jobs:
       - macos_test
       - windows_build
       - windows_test
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
