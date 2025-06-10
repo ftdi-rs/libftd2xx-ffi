@@ -47,20 +47,31 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
-      - name: Build with musl
-        run: |
-          cargo build --features=static --target ${{ matrix.target }}
-          cargo build --features=static,bindgen --target ${{ matrix.target }}
-          cargo build --examples --features=static,bindgen --target ${{ matrix.target }}
+      - name: bindgen glibc
+        if: ${{ contains(matrix.target, 'gnu') }}
+        run: cargo build --target ${{ matrix.target }} --features=bindgen
+      - name: bindgen musl
         if: ${{ contains(matrix.target, 'musl') }}
+        run: cargo build --target ${{ matrix.target }} --features=bindgen
+      - run: find target/ -name bindings.rs
+      - uses: actions/upload-artifact@v4
+        with:
+          path: target/**/bindings.rs
+          name: ${{ matrix.target }}-bindings.rs
+          if-no-files-found: error
+      - name: Build with musl
+        if: ${{ contains(matrix.target, 'musl') }}
+        run: |
+          cargo build --target ${{ matrix.target }} --features=static
+          cargo build --target ${{ matrix.target }} --features=static,bindgen
+          cargo build --target ${{ matrix.target }} --examples --features=static,bindgen
       - name: Build with glibc
+        if: ${{ contains(matrix.target, 'gnu') }}
         run: |
           cargo build --target ${{ matrix.target }}
-          cargo build --features=bindgen  --target ${{ matrix.target }}
-          cargo build --features=static  --target ${{ matrix.target }}
-          cargo build --features=static,bindgen  --target ${{ matrix.target }}
-          cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}
-        if: ${{ contains(matrix.target, 'gnu') }}
+          cargo build --target ${{ matrix.target }} --features=static
+          cargo build --target ${{ matrix.target }} --features=static,bindgen
+          cargo build --target ${{ matrix.target }} --examples --features=static,bindgen
       - run: cargo doc
 
   macos_build:
@@ -74,8 +85,13 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: x86_64-apple-darwin
-      - run: cargo build --target x86_64-apple-darwin
       - run: cargo build --features=bindgen --target x86_64-apple-darwin
+      - uses: actions/upload-artifact@v4
+        with:
+          path: target/**/bindings.rs
+          name: x86_64-apple-darwin-bindings.rs
+          if-no-files-found: error
+      - run: cargo build --target x86_64-apple-darwin
       - run: cargo doc
 
   windows_build:
@@ -92,10 +108,15 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
-      - run: |
-          cargo build --target ${{ matrix.target }}
-          cargo build --features=static  --target ${{ matrix.target }}
-          cargo build --examples --features=static  --target ${{ matrix.target }}
+      - run: cargo build --target ${{ matrix.target }} --features=bindgen
+      - uses: actions/upload-artifact@v4
+        with:
+          path: target/**/bindings.rs
+          name: ${{ matrix.target }}-bindings.rs
+          if-no-files-found: error
+      - run: cargo build --target ${{ matrix.target }}
+      - run: cargo build --target ${{ matrix.target }} --features=static
+      - run: cargo build --target ${{ matrix.target }} --examples --features=static
       - run: cargo doc
 
   linux_test:
