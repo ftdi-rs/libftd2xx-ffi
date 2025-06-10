@@ -49,18 +49,22 @@ jobs:
           targets: ${{ matrix.target }}
       - name: Build with musl
         run: |
-          cargo build --features=static --target ${{ matrix.target }}
-          cargo build --features=static,bindgen --target ${{ matrix.target }}
-          cargo build --examples --features=static,bindgen --target ${{ matrix.target }}
+          cargo build --target ${{ matrix.target }} --features=static
+          cargo build --target ${{ matrix.target }} --features=static,bindgen
+          cargo build --target ${{ matrix.target }} --examples --features=static,bindgen
         if: ${{ contains(matrix.target, 'musl') }}
       - name: Build with glibc
         run: |
           cargo build --target ${{ matrix.target }}
-          cargo build --features=bindgen  --target ${{ matrix.target }}
-          cargo build --features=static  --target ${{ matrix.target }}
-          cargo build --features=static,bindgen  --target ${{ matrix.target }}
-          cargo build --examples --features=static,bindgen  --target ${{ matrix.target }}
+          cargo build --target ${{ matrix.target }} --features=bindgen
+          cargo build --target ${{ matrix.target }} --features=static
+          cargo build --target ${{ matrix.target }} --features=static,bindgen
+          cargo build --target ${{ matrix.target }} --examples --features=static,bindgen
         if: ${{ contains(matrix.target, 'gnu') }}
+      - uses: actions/upload-artifact@v4
+        with:
+          path: target/**/bindings.rs
+          if-no-files-found: error
       - run: cargo doc
 
   macos_build:
@@ -76,6 +80,10 @@ jobs:
           targets: x86_64-apple-darwin
       - run: cargo build --target x86_64-apple-darwin
       - run: cargo build --features=bindgen --target x86_64-apple-darwin
+      - uses: actions/upload-artifact@v4
+        with:
+          path: target/**/bindings.rs
+          if-no-files-found: error
       - run: cargo doc
 
   windows_build:
@@ -94,8 +102,13 @@ jobs:
           targets: ${{ matrix.target }}
       - run: |
           cargo build --target ${{ matrix.target }}
-          cargo build --features=static  --target ${{ matrix.target }}
-          cargo build --examples --features=static  --target ${{ matrix.target }}
+          cargo build --target ${{ matrix.target }} --features=static
+          cargo build --target ${{ matrix.target }} --features=bindgen
+          cargo build --target ${{ matrix.target }} --examples --features=static
+      - uses: actions/upload-artifact@v4
+        with:
+          path: target/**/bindings.rs
+          if-no-files-found: error
       - run: cargo doc
 
   linux_test:
