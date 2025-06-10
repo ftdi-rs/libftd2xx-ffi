@@ -1,4 +1,4 @@
-use libftd2xx_ffi::{FT_GetLibraryVersion, DWORD, FT_STATUS};
+use libftd2xx_ffi::{DWORD, FT_GetLibraryVersion, FT_STATUS};
 
 fn main() {
     let mut version: DWORD = 5;

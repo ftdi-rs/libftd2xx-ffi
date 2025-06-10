@@ -5,7 +5,7 @@ description = "Rust FFI bindings to the FTDI D2XX drivers."
 keywords = ["ftdi", "ffi", "usb"]
 categories = ["external-ffi-bindings"]
 authors = ["Alex Martens <alex@thinglab.org>"]
-edition = "2021"
+edition = "2024"
 readme = "README.md"
 build = "build.rs"
 repository = "https://github.com/ftdi-rs/libftd2xx-ffi"
@@ -21,7 +21,6 @@ exclude = [
 ]
 
 [lints.rust]
-rust_2018_idioms = { level = "warn", priority = -1 }
 future-incompatible = "warn"
 
 [lints.clippy]
