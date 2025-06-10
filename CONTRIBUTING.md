@@ -17,6 +17,7 @@ sudo ./apfs-fuse -o uid="$(id -u)",gid="$(id -g)",allow_other D2XX1.4.16.dmg d2x
 ```
 
 Mac bindings can be generated cross-platform with:
+
 ```bash
-bindgen --allowlist-function 'FT_.*' --allowlist-type 'FT_.*' --allowlist-var 'FT_.*' --rustfmt-bindings vendor/macos/ftd2xx.h > src/bindings_macos_x64.rs
+bindgen --allowlist-function 'FT_.*' --allowlist-type 'FT_.*' --allowlist-var 'FT_.*' vendor/macos/ftd2xx.h > src/bindings_macos_x64.rs
 ```
