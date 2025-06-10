@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
 - Updated bindgen dependency from `0.70.1` to `0.72.0`.
+- Updated the edition from 2021 to 2024.
 
 ## [0.8.7] - 2024-12-01
 

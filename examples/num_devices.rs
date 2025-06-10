@@ -1,4 +1,4 @@
-use libftd2xx_ffi::{FT_ListDevices, DWORD, FT_LIST_NUMBER_ONLY, FT_STATUS, PVOID};
+use libftd2xx_ffi::{DWORD, FT_LIST_NUMBER_ONLY, FT_ListDevices, FT_STATUS, PVOID};
 
 fn main() {
     let mut num_devs: DWORD = 5;
