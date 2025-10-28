@@ -54,7 +54,7 @@ jobs:
         if: ${{ contains(matrix.target, 'musl') }}
         run: cargo build --target ${{ matrix.target }} --features=bindgen
       - run: find target/ -name bindings.rs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: target/**/bindings.rs
           name: ${{ matrix.target }}-bindings.rs
@@ -86,7 +86,7 @@ jobs:
         with:
           targets: x86_64-apple-darwin
       - run: cargo build --features=bindgen --target x86_64-apple-darwin
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: target/**/bindings.rs
           name: x86_64-apple-darwin-bindings.rs
@@ -109,7 +109,7 @@ jobs:
         with:
           targets: ${{ matrix.target }}
       - run: cargo build --target ${{ matrix.target }} --features=bindgen
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: target/**/bindings.rs
           name: ${{ matrix.target }}-bindings.rs
