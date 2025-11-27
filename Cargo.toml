@@ -1,6 +1,6 @@
 [package]
 name = "libftd2xx-ffi"
-version = "0.8.7"
+version = "0.8.8"
 description = "Rust FFI bindings to the FTDI D2XX drivers."
 keywords = ["ftdi", "ffi", "usb"]
 categories = ["external-ffi-bindings"]
@@ -8,7 +8,7 @@ authors = ["Alex Martens <alex@thinglab.org>"]
 edition = "2024"
 readme = "README.md"
 build = "build.rs"
-repository = "https://github.com/ftdi-rs/libftd2xx-ffi"
+repository = "https://github.com/recoord/libftd2xx-ffi"
 documentation = "https://docs.rs/libftd2xx-ffi"
 license-file = "LICENSE"
 links = "ftd2xx"

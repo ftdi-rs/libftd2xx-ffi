@@ -294,6 +294,10 @@ enum {
 #define FT_232R_CBUS_IOMODE					0x0A	//	IO Mode for CBUS bit-bang
 #define FT_232R_CBUS_BITBANG_WR				0x0B	//	Bit-bang write strobe
 #define FT_232R_CBUS_BITBANG_RD				0x0C	//	Bit-bang read strobe
+#define FT_232R_CBUS0_RXF					0x0D	//	CBUS0 RXF#
+#define FT_232R_CBUS1_TXE					0x0D	//	CBUS1 TXE#
+#define FT_232R_CBUS2_RD					0x0D	//	CBUS2 RD#
+#define FT_232R_CBUS3_WR					0x0D	//	CBUS3 WR#
 /** @} */
 
 /** @{ 
@@ -2265,18 +2269,18 @@ extern "C" {
 
 		/// GPIO Configuration
 		UCHAR count;		/// GPIO Count, supported values are 0 to 7 
-		UCHAR gpio1;		/// GPIO Number 1, supports device GPIO values
-		UCHAR gpio2;		/// GPIO Number 2, supports device GPIO values
-		UCHAR gpio3;		/// GPIO Number 3, supports device GPIO values
-		UCHAR gpio4;		/// GPIO Number 4, supports device GPIO values
-		UCHAR gpio5;		/// GPIO Number 5, supports device GPIO values (FTx233HP only)
-		UCHAR gpio6;		/// GPIO Number 6, supports device GPIO values (FTx233HP only)
-		UCHAR gpio7;		/// GPIO Number 7, supports device GPIO values (FTx233HP only)
+		UCHAR srcPin1;		/// GPIO Number 1, supports device GPIO values
+		UCHAR srcPin2;		/// GPIO Number 2, supports device GPIO values
+		UCHAR srcPin3;		/// GPIO Number 3, supports device GPIO values
+		UCHAR srcPin4;		/// GPIO Number 4, supports device GPIO values
+		UCHAR srcPin5;		/// GPIO Number 5, supports device GPIO values (FTx233HP only)
+		UCHAR srcPin6;		/// GPIO Number 6, supports device GPIO values (FTx233HP only)
+		UCHAR srcPin7;		/// GPIO Number 7, supports device GPIO values (FTx233HP only)
 		UCHAR pd1lden;		/// PD1 Load Enable, supports device GPIO values
 		UCHAR pd2lden;		/// PD2 Load Enable, supports device GPIO values (FTx233HP only)
 		UCHAR dispin;		/// Discharge Pin, supports device GPIO values
-		UCHAR disenbm;		/// Discharge Enable BM, 0 for "Drive Hi", 1 for "Drive Low", 2 for "Input Mode", 3 for "Don't Care"
-		UCHAR disdisbm;		/// Discharge Disable BM, 0 for "Drive Hi", 1 for "Drive Low", 2 for "Input Mode", 3 for "Don't Care"
+		UCHAR disenbm;		/// Discharge Enable BM, 0 for "Drive Low", 1 for "Drive Hi", 2 for "Input Mode", 3 for "Don't Care"
+		UCHAR disdisbm;		/// Discharge Disable BM, 0 for "Drive Low", 1 for "Drive Hi", 2 for "Input Mode", 3 for "Don't Care"
 		UCHAR ccselect;		/// CC Select Indicator, supports device GPIO values
 
 		/// ISET Configuration
@@ -2287,7 +2291,7 @@ extern "C" {
 		UCHAR isetpd2;		/// non-zero to enable ISET_PD2
 		UCHAR iseten;		/// non-zero to set ISET_ENABLED
 
-		/// BM Configuration, 0 for "Drive Hi", 1 for "Drive Low", 2 for "Input Mode", 3 for "Don't Care"
+		/// BM Configuration, 0 for "Drive Low", 1 for "Drive Hi", 2 for "Input Mode", 3 for "Don't Care"
 		UCHAR PDO1_GPIO[7];		/// PDO1 GPIO1 to GPIO7
 		UCHAR PDO2_GPIO[7];		/// PDO2 GPIO1 to GPIO7
 		UCHAR PDO3_GPIO[7];		/// PDO3 GPIO1 to GPIO7

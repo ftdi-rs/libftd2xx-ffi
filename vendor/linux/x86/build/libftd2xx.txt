@@ -1,5 +1,0 @@
-Output of 'file' command:
-=========================
-./build/i386/libftd2xx.so.1.4.24: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, BuildID[sha1]=112f338f58b746494c4560eae187bb1ebc59a001, not stripped
-Output of 'readelf -A' command:
-===============================
