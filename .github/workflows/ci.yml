@@ -76,7 +76,7 @@ jobs:
 
   macos_build:
     name: Mac Build
-    runs-on: macos-13
+    runs-on: macos-latest
     env:
       RUSTFLAGS: "-D warnings"
       RUSTDOCFLAGS: "-D warnings"
@@ -138,7 +138,7 @@ jobs:
 
   macos_test:
     name: Mac Unit Tests
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
