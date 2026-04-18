@@ -27,9 +27,6 @@ future-incompatible = "warn"
 nursery = { level = "warn", priority = -1 }
 pedantic = { level = "warn", priority = -1 }
 
-[dependencies]
-cfg-if = "^1.0.0"
-
 [build-dependencies]
 bindgen = { version = "~0.72.0", optional = true }
 
