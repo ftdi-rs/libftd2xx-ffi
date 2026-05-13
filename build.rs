@@ -131,15 +131,26 @@ fn linker_options() {
 
 #[cfg(feature = "static")]
 fn linker_options() {
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    let target_env = env::var("CARGO_CFG_TARGET_ENV").unwrap();
+
+    assert!(
+        !(target_os == "windows" && target_env == "gnu"),
+        r"
+libftd2xx-ffi static linking is not supported when using the windows-gnu target.
+The static library (ftd2xx.lib) is MSVC-compiled and ABI-incompatible with the GNU toolchain.
+Use windows-msvc or disable `static` feature."
+    );
+
     println!("cargo:rustc-link-lib=static=ftd2xx");
 
-    match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
+    match target_os.as_str() {
         "windows" | "linux" => {}
         "macos" => {
             println!("cargo:rustc-link-lib=framework=IOKit");
             println!("cargo:rustc-link-lib=framework=CoreFoundation");
         }
-        target_os => panic!("Target OS not supported: {target_os}"),
+        _ => panic!("Target OS not supported: {target_os}"),
     }
 }
 
