@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated pre-generated bindings from bindgen `0.58.1` to `0.72.0` for Linux and Windows.
 - Updated pre-generated bindings from bindgen `0.59.1` to `0.72.0` for Mac.
+- Replaced `cfg-if` with `cfg_select`; Rust >= 1.95.0 is now required.
 
 ### Updated
 
