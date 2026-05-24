@@ -5,7 +5,7 @@ fn main() {
     let dummy: PVOID = std::ptr::null_mut();
     let status: FT_STATUS = unsafe {
         FT_ListDevices(
-            &mut num_devs as *mut DWORD as *mut std::ffi::c_void,
+            (&raw mut num_devs).cast::<std::ffi::c_void>(),
             dummy,
             FT_LIST_NUMBER_ONLY,
         )
